@@ -1,0 +1,196 @@
+'use client'
+
+import { VerdictResult, TONES, Ruling } from '@/lib/types'
+
+const RULING_COLORS: Record<Ruling, string> = {
+  'CORRECT':        '#4CAF50',
+  'MOSTLY RIGHT':   '#8BC34A',
+  'PARTIALLY RIGHT':'#FF9800',
+  'MOSTLY WRONG':   '#FF5722',
+  'WRONG':          '#E8251A',
+}
+
+const RULING_ICONS: Record<Ruling, string> = {
+  'CORRECT':        '✓',
+  'MOSTLY RIGHT':   '✓',
+  'PARTIALLY RIGHT':'~',
+  'MOSTLY WRONG':   '✗',
+  'WRONG':          '✗',
+}
+
+interface Props {
+  verdict: VerdictResult
+}
+
+export default function VerdictCard({ verdict }: Props) {
+  const tone = TONES.find(t => t.id === verdict.tone)
+  const rulingColor = RULING_COLORS[verdict.ruling]
+
+  const handleShare = () => {
+    const text = `🤖 ArgueBot Verdict: ${verdict.ruling} (${verdict.score}%)\n\n"${verdict.summary.slice(0, 120)}..."\n\nGet your argument judged at arguebot.app`
+    if (navigator.share) {
+      navigator.share({ title: 'My ArgueBot Verdict', text })
+    } else {
+      navigator.clipboard.writeText(text)
+      alert('Verdict copied to clipboard!')
+    }
+  }
+
+  return (
+    <div style={{
+      background: 'var(--white)',
+      borderRadius: 40,
+      overflow: 'hidden',
+      boxShadow: '0 24px 70px rgba(0,0,0,0.5)',
+      animation: 'fadeInUp 0.5s ease both',
+    }}>
+      {/* Header */}
+      <div style={{
+        background: 'var(--red)',
+        padding: '20px 28px',
+        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+          <span style={{ fontSize: 26 }}>⚖️</span>
+          <div>
+            <div style={{
+              fontFamily: "'Bebas Neue', sans-serif",
+              fontSize: 22, letterSpacing: 2, color: 'white',
+            }}>THE VERDICT IS IN</div>
+            <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.7)', marginTop: 1 }}>
+              Based on live web search · {new Date(verdict.searchedAt).toLocaleTimeString()}
+            </div>
+          </div>
+        </div>
+        <div style={{
+          background: 'white',
+          color: 'var(--red)',
+          fontFamily: "'Bebas Neue', sans-serif",
+          fontSize: 28, letterSpacing: 1,
+          padding: '8px 18px',
+          borderRadius: 20,
+          boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+        }}>{verdict.score}%</div>
+      </div>
+
+      {/* Body */}
+      <div style={{ padding: 28, background: 'var(--white)', color: 'var(--charcoal)' }}>
+
+        {/* Ruling */}
+        <div style={{
+          fontFamily: "'Bebas Neue', sans-serif",
+          fontSize: 34, letterSpacing: 2,
+          color: rulingColor,
+          marginBottom: 16,
+          display: 'flex', alignItems: 'center', gap: 12,
+        }}>
+          <div style={{
+            width: 38, height: 38,
+            background: rulingColor,
+            borderRadius: '50%',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            color: 'white', fontSize: 18, flexShrink: 0,
+          }}>{RULING_ICONS[verdict.ruling]}</div>
+          {verdict.ruling}
+        </div>
+
+        {/* Summary */}
+        <p style={{
+          fontSize: 15, fontWeight: 400,
+          lineHeight: 1.7, color: '#333',
+          marginBottom: 20,
+        }}>{verdict.summary}</p>
+
+        {/* Evidence */}
+        <div style={{
+          background: 'var(--off-white)',
+          borderRadius: 20, padding: '16px 20px',
+          marginBottom: 16,
+        }}>
+          <div style={{
+            fontSize: 11, fontWeight: 700,
+            letterSpacing: '2px', textTransform: 'uppercase',
+            color: 'var(--muted)', marginBottom: 10,
+          }}>📋 The Evidence</div>
+          {verdict.evidence.map((item, i) => (
+            <div key={i} style={{
+              display: 'flex', gap: 10, alignItems: 'flex-start',
+              marginBottom: i < verdict.evidence.length - 1 ? 10 : 0,
+            }}>
+              <div style={{
+                width: 6, height: 6,
+                background: 'var(--red)', borderRadius: '50%',
+                flexShrink: 0, marginTop: 7,
+              }} />
+              <div>
+                <span style={{ fontSize: 14, color: '#444', lineHeight: 1.5 }}>
+                  {item.text}
+                </span>
+                {item.source && (
+                  <span style={{
+                    fontSize: 11, color: 'var(--muted)',
+                    marginLeft: 6, fontFamily: "'DM Mono', monospace",
+                  }}>— {item.source}</span>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Twist */}
+        {verdict.twist && (
+          <div style={{
+            background: 'rgba(232,37,26,0.06)',
+            border: '1.5px solid rgba(232,37,26,0.2)',
+            borderRadius: 20, padding: '14px 18px',
+            marginBottom: 20,
+          }}>
+            <div style={{
+              fontSize: 11, fontWeight: 700,
+              letterSpacing: '2px', textTransform: 'uppercase',
+              color: 'var(--red)', marginBottom: 6,
+            }}>💡 Actually…</div>
+            <p style={{ fontSize: 14, color: '#444', lineHeight: 1.5 }}>
+              {verdict.twist}
+            </p>
+          </div>
+        )}
+
+        {/* Footer */}
+        <div style={{
+          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+          paddingTop: 18,
+          borderTop: '1px solid rgba(0,0,0,0.06)',
+        }}>
+          <div style={{
+            display: 'flex', alignItems: 'center', gap: 6,
+            background: 'var(--charcoal)',
+            color: 'white',
+            fontSize: 12, fontWeight: 600,
+            letterSpacing: 1, textTransform: 'uppercase',
+            padding: '6px 14px', borderRadius: 100,
+          }}>
+            {tone?.emoji} {tone?.label} Mode
+          </div>
+
+          <button
+            onClick={handleShare}
+            style={{
+              display: 'flex', alignItems: 'center', gap: 8,
+              background: 'var(--red)', color: 'white',
+              border: 'none', borderRadius: 12,
+              padding: '10px 20px',
+              fontFamily: "'DM Sans', sans-serif",
+              fontSize: 13, fontWeight: 600,
+              cursor: 'pointer',
+              boxShadow: '0 4px 12px var(--red-glow)',
+              transition: 'all 0.2s',
+            }}
+          >
+            📤 Share Receipt
+          </button>
+        </div>
+      </div>
+    </div>
+  )
+}
