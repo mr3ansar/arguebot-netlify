@@ -127,7 +127,7 @@ async function runModerate(argument: string, tone: Tone, useSearch: boolean) {
   const parsed = JSON.parse(clean)
 
   const paperEvidence: EvidenceItem[] = papers.map(p => ({
-    text:    p.tldr ?? p.abstract,
+    text:     p.abstract,
     source:  'OpenAlex',
     type:    'paper' as const,
     url:     p.url,
