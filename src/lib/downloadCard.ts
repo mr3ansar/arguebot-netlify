@@ -167,7 +167,7 @@ export async function downloadVerdictCard(verdict: VerdictResult, argument: stri
   }
 }
 
-import { DebateResult } from './modes'
+
 
 const RULING_COLORS_DEBATE: Record<string, string> = {
   'CORRECT':        '#4CAF50',
