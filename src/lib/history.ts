@@ -1,8 +1,8 @@
-import { supabase } from './supabase'
+import { getSupabase } from './supabase'
 import { VerdictResult, HistoryItem } from './types'
 
 export async function saveVerdict(argument: string, verdict: VerdictResult): Promise<void> {
-  const { error } = await supabase.from('verdicts').insert({
+  const { error } = await getSupabase().from('verdicts').insert({
     argument,
     ruling:               verdict.ruling,
     score:                verdict.score,
@@ -18,7 +18,7 @@ export async function saveVerdict(argument: string, verdict: VerdictResult): Pro
 }
 
 export async function deleteVerdict(id: string): Promise<boolean> {
-  const { error } = await supabase
+  const { error } = await getSupabase()
     .from('verdicts')
     .delete()
     .eq('id', id)
@@ -31,7 +31,7 @@ export async function deleteVerdict(id: string): Promise<boolean> {
 }
 
 export async function fetchHistory(limit = 10): Promise<HistoryItem[]> {
-  const { data, error } = await supabase
+  const { data, error } = await getSupabase()
     .from('verdicts')
     .select('*')
     .order('created_at', { ascending: false })
