@@ -1,28 +1,35 @@
 import { Ratelimit } from '@upstash/ratelimit'
 import { Redis } from '@upstash/redis'
 
-const redis = new Redis({
-  url:   process.env.UPSTASH_REDIS_REST_URL!,
-  token: process.env.UPSTASH_REDIS_REST_TOKEN!,
-})
+let _redis: Redis
+
+function getRedis() {
+  if (!_redis) {
+    _redis = new Redis({
+      url:   process.env.UPSTASH_REDIS_REST_URL!,
+      token: process.env.UPSTASH_REDIS_REST_TOKEN!,
+    })
+  }
+  return _redis
+}
 
 // Different limits per mode
 export const liteLimiter = new Ratelimit({
-  redis,
+  redis:     getRedis(),
   limiter:   Ratelimit.slidingWindow(20, '1 m'),
   analytics: true,
   prefix:    'arguebot:lite',
 })
 
 export const moderateLimiter = new Ratelimit({
-  redis,
+  redis:     getRedis(),
   limiter:   Ratelimit.slidingWindow(10, '1 m'),
   analytics: true,
   prefix:    'arguebot:moderate',
 })
 
 export const heavyLimiter = new Ratelimit({
-  redis,
+  redis:     getRedis(),
   limiter:   Ratelimit.slidingWindow(3, '1 m'),
   analytics: true,
   prefix:    'arguebot:heavy',
