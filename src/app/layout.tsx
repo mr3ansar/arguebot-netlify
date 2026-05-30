@@ -3,13 +3,45 @@ import './globals.css'
 
 export const metadata: Metadata = {
   title: 'ArgueBot — Are You Actually Right?',
-  description: 'Drop your argument. We search the web, weigh the facts, and deliver the verdict with zero mercy and maximum personality.',
+  description: 'Drop your argument. AI searches the web, weighs the facts, and delivers the verdict with zero mercy and maximum personality.',
+  keywords: ['fact checker', 'argument checker', 'ai debate', 'are you right', 'arguebot'],
+  authors: [{ name: 'ArgueBot' }],
+  creator: 'ArgueBot',
+  metadataBase: new URL('https://arguebot.app'),
+  openGraph: {
+    type:        'website',
+    url:         'https://arguebot.app',
+    title:       'ArgueBot — Are You Actually Right?',
+    description: 'Drop your argument. AI searches the web, weighs the facts, and delivers the verdict with zero mercy and maximum personality.',
+    siteName:    'ArgueBot',
+    images: [{
+      url:    '/api/og',
+      width:  1200,
+      height: 630,
+      alt:    'ArgueBot — AI Fact Checker',
+    }],
+  },
+  twitter: {
+    card:        'summary_large_image',
+    title:       'ArgueBot — Are You Actually Right?',
+    description: 'Drop your argument. AI searches the web and delivers the verdict — with zero mercy.',
+    images:      ['/api/og'],
+    creator:     '@arguebot',
+  },
+  robots: {
+    index:  true,
+    follow: true,
+  },
+  icons: {
+    icon:  '/favicon.ico',
+    apple: '/apple-touch-icon.png',
+  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body>{children}</body>
+    <html lang="en" suppressHydrationWarning>
+      <body suppressHydrationWarning>{children}</body>
     </html>
   )
 }

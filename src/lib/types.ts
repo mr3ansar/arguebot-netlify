@@ -22,19 +22,26 @@ export const TONES: ToneConfig[] = [
 
 export type Ruling = 'CORRECT' | 'MOSTLY RIGHT' | 'PARTIALLY RIGHT' | 'MOSTLY WRONG' | 'WRONG'
 
+export type EvidenceType = 'web' | 'paper'
+
 export interface EvidenceItem {
   text: string
   source?: string
+  type?: EvidenceType   // 'web' or 'paper'
+  url?: string          // link to paper or source
+  authors?: string      // for papers: "Smith et al."
+  year?: string         // for papers: "2023"
 }
 
 export interface VerdictResult {
   ruling: Ruling
-  score: number          // 0–100
-  summary: string        // toned response paragraph
+  score: number
+  summary: string
   evidence: EvidenceItem[]
-  twist: string          // the "actually…" wrinkle
+  twist: string
   tone: Tone
   searchedAt: string
+  hasResearchPapers?: boolean
 }
 
 export interface HistoryItem {
