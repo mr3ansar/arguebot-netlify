@@ -1,3 +1,4 @@
+import { DebateResult } from './modes'
 import { VerdictResult, TONES } from './types'
 
 const RULING_COLORS: Record<string, string> = {
