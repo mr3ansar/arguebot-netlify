@@ -1,16 +1,11 @@
 import { Ratelimit } from '@upstash/ratelimit'
 import { Redis } from '@upstash/redis'
 
-let _redis: Redis
-
-function getRedis() {
-  if (!_redis) {
-    _redis = new Redis({
-      url:   process.env.UPSTASH_REDIS_REST_URL!,
-      token: process.env.UPSTASH_REDIS_REST_TOKEN!,
-    })
-  }
-  return _redis
+function getRedis(): Redis {
+  const url   = process.env.UPSTASH_REDIS_REST_URL
+  const token = process.env.UPSTASH_REDIS_REST_TOKEN
+  if (!url || !token) throw new Error('Upstash env vars missing')
+  return new Redis({ url, token })
 }
 
 // Different limits per mode
