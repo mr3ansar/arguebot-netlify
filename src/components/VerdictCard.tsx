@@ -33,7 +33,8 @@ export default function VerdictCard({ verdict, argument }: Props) {
 
   const handleDownload = async () => {
     setDownloading(true)
-    await downloadVerdictCard(verdict, argument ?? '')
+    const html2canvas = (await import('html2canvas')).default
+    await downloadVerdictCard(verdict, argument ?? '', html2canvas)
     setDownloading(false)
   }
 

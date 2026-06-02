@@ -26,7 +26,8 @@ export default function DebateCard({ debate, argument }: Props) {
 
   const handleDownload = async () => {
     setDownloading(true)
-    await downloadDebateCard(debate, argument ?? '')
+    const html2canvas = (await import('html2canvas')).default
+    await downloadDebateCard(debate, argument ?? '', html2canvas)
     setDownloading(false)
   }
 

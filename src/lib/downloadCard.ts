@@ -117,9 +117,7 @@ function buildCardHTML(verdict: VerdictResult, argument: string): string {
     '</body></html>'
 }
 
-export async function downloadVerdictCard(verdict: VerdictResult, argument: string) {
-  const html2canvas = (await import('html2canvas')).default
-
+export async function downloadVerdictCard(verdict: VerdictResult, argument: string, html2canvas: any) {
   const iframe = document.createElement('iframe')
   iframe.style.cssText = 'position:fixed;left:-9999px;top:-9999px;width:600px;height:1px;border:none;opacity:0;pointer-events:none;'
   document.body.appendChild(iframe)
@@ -268,9 +266,7 @@ function buildDebateCardHTML(debate: DebateResult, argument: string): string {
     '</body></html>'
 }
 
-export async function downloadDebateCard(debate: DebateResult, argument: string) {
-  const html2canvas = (await import('html2canvas')).default
-
+export async function downloadDebateCard(debate: DebateResult, argument: string, html2canvas: any) {
   const iframe = document.createElement('iframe')
   iframe.style.cssText = 'position:fixed;left:-9999px;top:-9999px;width:600px;height:1px;border:none;opacity:0;pointer-events:none;'
   document.body.appendChild(iframe)
