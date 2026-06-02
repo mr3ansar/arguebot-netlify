@@ -4,9 +4,6 @@ const nextConfig: NextConfig = {
   // Required for Cloudflare Pages
   output: 'standalone',
 
-  // Exclude client-only libraries from the server bundle to keep Worker under 3 MiB
-  serverExternalPackages: ['html2canvas'],
-
   // Allow images from external domains
   images: {
     remotePatterns: [
