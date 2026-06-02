@@ -4,22 +4,17 @@ import { tavily } from '@tavily/core'
 import { SYSTEM_PROMPT, USER_PROMPT } from '@/lib/prompts'
 import { Tone, VerdictResult, EvidenceItem } from '@/lib/types'
 import { shouldSearchPapers, searchOpenAlex, formatPapersForPrompt, OpenAlexPaper } from '@/lib/openAlex'
-import { liteLimiter, moderateLimiter, heavyLimiter, checkRateLimit } from '@/lib/rateLimit'
 import { Mode, DebateResult, DebateTurn } from '@/lib/modes'
 import { ADVOCATE_PROMPT, SKEPTIC_PROMPT, JUDGE_PROMPT } from '@/lib/debatePrompts'
 
-// ── Lazy singletons — created on first request, not at build time ──────────
-let _groq: Groq
-let _tavily: ReturnType<typeof tavily>
+export const dynamic = 'force-dynamic'
 
+// Lazy init — never runs at module load time / build time
 function getGroq() {
-  if (!_groq) _groq = new Groq({ apiKey: process.env.GROQ_API_KEY })
-  return _groq
+  return new Groq({ apiKey: process.env.GROQ_API_KEY })
 }
-
 function getTavily() {
-  if (!_tavily) _tavily = tavily({ apiKey: process.env.TAVILY_API_KEY ?? '' })
-  return _tavily
+  return tavily({ apiKey: process.env.TAVILY_API_KEY ?? '' })
 }
 
 const QUESTION_REWRITE_PROMPT = [
@@ -39,12 +34,6 @@ const QUESTION_REWRITE_PROMPT = [
   'Argument: Social media causes depression in teenagers',
   'Question: What is the relationship between social media use and adolescent mental health?',
 ].join('\n')
-
-function getLimiter(mode: Mode) {
-  if (mode === 'lite')  return liteLimiter
-  if (mode === 'heavy') return heavyLimiter
-  return moderateLimiter
-}
 
 // ── Shared: web search ─────────────────────────────────────────────────────
 async function getWebContext(argument: string, deep = false): Promise<string> {
@@ -102,8 +91,8 @@ async function runLite(argument: string, tone: Tone, useSearch: boolean) {
     ],
   })
 
-  const raw    = completion.choices[0]?.message?.content ?? ''
-  const clean  = extractJSON(raw)
+  const raw   = completion.choices[0]?.message?.content ?? ''
+  const clean = extractJSON(raw)
   const parsed = JSON.parse(clean)
 
   const verdict: VerdictResult = {
@@ -138,7 +127,7 @@ async function runModerate(argument: string, tone: Tone, useSearch: boolean) {
   const parsed = JSON.parse(clean)
 
   const paperEvidence: EvidenceItem[] = papers.map(p => ({
-    text:    p.abstract,
+    text:     p.abstract,
     source:  'OpenAlex',
     type:    'paper' as const,
     url:     p.url,
@@ -163,17 +152,20 @@ async function runModerate(argument: string, tone: Tone, useSearch: boolean) {
 
 // ── Mode: HEAVY (debate) ───────────────────────────────────────────────────
 async function runHeavy(argument: string, tone: Tone, useSearch: boolean) {
+  // Get context for both sides
   const [webContext, { context: paperContext, papers }] = await Promise.all([
     useSearch ? getWebContext(argument, true) : Promise.resolve(''),
     getPaperContext(argument),
   ])
   const fullContext = webContext + paperContext
 
-  const [advocateRes] = await Promise.all([
+  // Step 1: Advocate and Skeptic run in parallel
+  const [advocateRes, skepticBaseRes] = await Promise.all([
     getGroq().chat.completions.create({
       model: 'llama-3.3-70b-versatile', temperature: 0.85, max_tokens: 300,
       messages: [{ role: 'user', content: ADVOCATE_PROMPT(argument, fullContext) }],
     }),
+    // Skeptic gets a placeholder — will use advocate's actual response
     getGroq().chat.completions.create({
       model: 'llama-3.3-70b-versatile', temperature: 0.85, max_tokens: 300,
       messages: [{ role: 'user', content: ADVOCATE_PROMPT(argument, fullContext) }],
@@ -182,12 +174,14 @@ async function runHeavy(argument: string, tone: Tone, useSearch: boolean) {
 
   const advocateContent = advocateRes.choices[0]?.message?.content?.trim() ?? ''
 
+  // Step 2: Skeptic rebuts the advocate (sequential — needs advocate output)
   const skepticRes = await getGroq().chat.completions.create({
     model: 'llama-3.3-70b-versatile', temperature: 0.85, max_tokens: 300,
     messages: [{ role: 'user', content: SKEPTIC_PROMPT(argument, advocateContent, fullContext) }],
   })
   const skepticContent = skepticRes.choices[0]?.message?.content?.trim() ?? ''
 
+  // Step 3: Judge rules on both
   const judgeRes = await getGroq().chat.completions.create({
     model: 'llama-3.3-70b-versatile', temperature: 0.8, max_tokens: 400,
     messages: [
@@ -226,15 +220,23 @@ function extractJSON(raw: string): string {
   if (start === -1 || end === -1) throw new Error('No JSON found')
   clean = clean.slice(start, end + 1)
 
+  // Remove all control characters except valid JSON whitespace
+  // This handles the "bad control character" error from Groq responses
   clean = clean.replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/g, ' ')
 
+  // Replace literal (unescaped) newlines/tabs inside JSON string values
+  // We do this by processing char by char to only fix chars inside strings
   let result   = ''
   let inString = false
   let escaped  = false
 
   for (let i = 0; i < clean.length; i++) {
     const ch = clean[i]
-    if (escaped) { result += ch; escaped = false; continue }
+    if (escaped) {
+      result  += ch
+      escaped  = false
+      continue
+    }
     if (ch === '\\') { result += ch; escaped = true; continue }
     if (ch === '"')  { result += ch; inString = !inString; continue }
     if (inString) {
@@ -248,6 +250,7 @@ function extractJSON(raw: string): string {
   return result
 }
 
+
 // ── Main handler ───────────────────────────────────────────────────────────
 export async function POST(req: NextRequest) {
   const body = await req.json() as {
@@ -259,7 +262,14 @@ export async function POST(req: NextRequest) {
 
   const { argument, tone, useSearch, mode = 'moderate' } = body
 
-  const rl = await checkRateLimit(getLimiter(mode), req)
+  // Rate limit per mode (dynamic import defers module evaluation to runtime)
+  const { checkRateLimit, getLiteLimiter, getModerateLimiter, getHeavyLimiter } =
+    await import('@/lib/rateLimit')
+  const limiter =
+    mode === 'lite'  ? getLiteLimiter() :
+    mode === 'heavy' ? getHeavyLimiter() :
+    getModerateLimiter()
+  const rl = await checkRateLimit(limiter, req)
   const headers = {
     'X-RateLimit-Limit':     String(rl.limit),
     'X-RateLimit-Remaining': String(rl.remaining),
@@ -281,9 +291,9 @@ export async function POST(req: NextRequest) {
   try {
     let result: { type: 'verdict' | 'debate'; data: VerdictResult | DebateResult }
 
-    if (mode === 'lite')       result = await runLite(argument, tone, useSearch)
+    if (mode === 'lite')     result = await runLite(argument, tone, useSearch)
     else if (mode === 'heavy') result = await runHeavy(argument, tone, useSearch)
-    else                       result = await runModerate(argument, tone, useSearch)
+    else                     result = await runModerate(argument, tone, useSearch)
 
     return NextResponse.json(result, { headers })
 
