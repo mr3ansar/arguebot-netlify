@@ -143,8 +143,7 @@ export async function downloadVerdictCard(verdict: VerdictResult, argument: stri
       height:          cardEl.scrollHeight,
       windowWidth:     600,
       windowHeight:    cardEl.scrollHeight,
-      onclone: (clonedDoc) => {
-        // Force all text elements to use system fonts in the clone
+      onclone: (clonedDoc: Document) => {
         const allEls = clonedDoc.querySelectorAll('*')
         allEls.forEach((el: any) => {
           if (el.style) {
@@ -291,7 +290,7 @@ export async function downloadDebateCard(debate: DebateResult, argument: string,
       height:          cardEl.scrollHeight,
       windowWidth:     600,
       windowHeight:    cardEl.scrollHeight,
-      onclone: (clonedDoc) => {
+      onclone: (clonedDoc: Document) => {
         const allEls = clonedDoc.querySelectorAll('*')
         allEls.forEach((el: any) => {
           if (el.style) {
