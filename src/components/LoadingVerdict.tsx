@@ -37,7 +37,7 @@ export default function LoadingVerdict({ currentStep }: Props) {
       </div>
 
       {/* Steps */}
-      <div style={{
+      <div className="loading-steps" style={{
         display: 'flex', justifyContent: 'center', gap: 24, marginTop: 24,
       }}>
         {STEPS.map((step, i) => {

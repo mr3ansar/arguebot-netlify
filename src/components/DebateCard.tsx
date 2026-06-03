@@ -48,7 +48,7 @@ export default function DebateCard({ debate, argument }: Props) {
   const judge    = debate.turns.find(t => t.role === 'judge')
 
   return (
-    <div style={{
+    <div className="debate-card" style={{
       background: 'var(--white)',
       borderRadius: 40, overflow: 'hidden',
       boxShadow: '0 24px 70px rgba(0,0,0,0.5)',
@@ -56,7 +56,7 @@ export default function DebateCard({ debate, argument }: Props) {
     }}>
 
       {/* Header */}
-      <div style={{
+      <div className="debate-header" style={{
         background: 'var(--charcoal)',
         padding: '20px 28px',
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
@@ -82,7 +82,7 @@ export default function DebateCard({ debate, argument }: Props) {
         }}>{debate.score}%</div>
       </div>
 
-      <div style={{ padding: 28, background: 'var(--white)' }}>
+      <div className="debate-body" style={{ padding: 28, background: 'var(--white)' }}>
 
         {/* Topic */}
         <div style={{

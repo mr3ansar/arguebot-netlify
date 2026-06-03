@@ -1,9 +1,63 @@
+@import "tailwindcss";
+
+:root {
+  --red:        #E8251A;
+  --red-dim:    rgba(232, 37, 26, 0.08);
+  --red-light:  #F05A51;
+  --red-glow:   rgba(232, 37, 26, 0.35);
+
+  --white:      #F5F3EF;
+
+  --charcoal:   #1A1A1A;
+  --charcoal-2: #222222;
+  --charcoal-3: #2A2A2A;
+
+  --off-white:  #F0EEE9;
+  --muted:      #888888;
+}
+
+body {
+  margin: 0;
+  background: var(--charcoal);
+  color: var(--white);
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.3; }
+}
 
 /* ── Mobile responsiveness ── */
 @media (max-width: 767px) {
 
   /* Shift content up for bottom mode bar */
   body { padding-bottom: 80px; }
+
+  /* Remove left margin — mode sidebar is a bottom bar on mobile */
+  .main-content {
+    margin-left: 0 !important;
+  }
+
+  /* Scale down background blobs */
+  .bg-blob-top {
+    width: 200px !important;
+    height: 200px !important;
+    top: -50px !important;
+    right: -50px !important;
+  }
+  .bg-blob-bottom {
+    width: 150px !important;
+    height: 150px !important;
+    bottom: 50px !important;
+    left: -40px !important;
+  }
 
   /* Navbar */
   nav {
@@ -14,18 +68,27 @@
   .hero-section {
     padding: 32px 16px 24px !important;
   }
+  .hero-heading {
+    font-size: clamp(48px, 12vw, 64px) !important;
+  }
 
   /* Input card */
   .input-card-wrapper {
     padding: 0 12px !important;
   }
+  .input-card {
+    padding: 20px !important;
+    border-radius: 28px !important;
+  }
 
   /* Score context + retry tones — stack vertically */
+  .score-context-wrapper {
+    padding: 0 12px !important;
+  }
   .score-context-bar {
     flex-direction: column !important;
     align-items: flex-start !important;
   }
-
   .retry-tones {
     flex-wrap: wrap !important;
     gap: 6px !important;
@@ -35,11 +98,82 @@
   .result-wrapper {
     padding: 0 12px !important;
   }
+  .verdict-card {
+    border-radius: 24px !important;
+  }
+  .verdict-header {
+    padding: 16px 20px !important;
+    flex-wrap: wrap !important;
+    gap: 12px !important;
+  }
+  .verdict-score {
+    font-size: 24px !important;
+    padding: 6px 14px !important;
+  }
+  .verdict-body {
+    padding: 20px !important;
+  }
+  .verdict-ruling {
+    font-size: 28px !important;
+  }
+
+  .debate-card {
+    border-radius: 24px !important;
+  }
+  .debate-header {
+    padding: 16px 20px !important;
+    flex-wrap: wrap !important;
+    gap: 12px !important;
+  }
+  .debate-body {
+    padding: 20px !important;
+  }
+
+  /* Loading */
+  .loading-card {
+    padding: 0 12px !important;
+  }
+  .loading-steps {
+    flex-wrap: wrap !important;
+    gap: 12px !important;
+  }
 
   /* History sidebar — full width on mobile */
   .history-sidebar {
     width: 100% !important;
     max-width: 100vw !important;
+  }
+
+  /* About page */
+  .about-content {
+    padding: 0 16px !important;
+    margin-top: 24px !important;
+  }
+  .about-card {
+    padding: 24px !important;
+    border-radius: 24px !important;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .main-content {
+    margin-left: 72px !important;
+  }
+
+  .hero-section {
+    padding: 48px 24px 32px !important;
+  }
+
+  .input-card-wrapper {
+    padding: 0 16px !important;
+  }
+
+  .result-wrapper {
+    padding: 0 16px !important;
+  }
+
+  .about-content {
+    padding: 0 20px !important;
   }
 }
 
@@ -63,5 +197,21 @@
   .verdict-score {
     font-size: 22px !important;
     padding: 6px 12px !important;
+  }
+
+  /* Tighten card bodies further */
+  .verdict-body {
+    padding: 16px !important;
+  }
+  .debate-body {
+    padding: 16px !important;
+  }
+  .input-card {
+    padding: 16px !important;
+  }
+
+  /* Hero heading smaller */
+  .hero-heading {
+    font-size: clamp(40px, 14vw, 52px) !important;
   }
 }

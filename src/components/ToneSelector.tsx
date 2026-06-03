@@ -16,7 +16,7 @@ export default function ToneSelector({ selected, onChange }: Props) {
         color: 'var(--muted)', marginBottom: 12,
       }}>Pick Your Judge</div>
 
-      <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+      <div className="tone-grid" style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
         {TONES.map(tone => {
           const active = selected === tone.id
           return (

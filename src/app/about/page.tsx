@@ -27,7 +27,7 @@ export default function AboutPage() {
       <div style={{ position: 'relative', zIndex: 5 }}>
         <Navbar />
 
-        <div style={{
+        <div className="about-content" style={{
           maxWidth: 680, margin: '40px auto 80px',
           padding: '0 24px',
           animation: 'fadeInUp 0.6s ease both',
@@ -66,7 +66,7 @@ export default function AboutPage() {
           </div>
 
           {/* How it works */}
-          <div style={{
+          <div className="about-card" style={{
             background: 'var(--charcoal-2)',
             border: '1px solid rgba(255,255,255,0.07)',
             borderRadius: 32, padding: 32, marginBottom: 24,
@@ -111,7 +111,7 @@ export default function AboutPage() {
           </div>
 
           {/* Tech stack */}
-          <div style={{
+          <div className="about-card" style={{
             background: 'var(--charcoal-2)',
             border: '1px solid rgba(255,255,255,0.07)',
             borderRadius: 32, padding: 32, marginBottom: 24,
@@ -149,7 +149,7 @@ export default function AboutPage() {
           </div>
 
           {/* Tones */}
-          <div style={{
+          <div className="about-card" style={{
             background: 'var(--charcoal-2)',
             border: '1px solid rgba(255,255,255,0.07)',
             borderRadius: 32, padding: 32, marginBottom: 40,

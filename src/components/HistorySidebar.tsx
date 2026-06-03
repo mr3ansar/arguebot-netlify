@@ -93,6 +93,7 @@ export default function HistorySidebar({ open, onClose, items, loading, onSelect
       {/* Sidebar panel */}
       <div
         ref={sidebarRef}
+        className="history-sidebar"
         style={{
           position: 'fixed', top: 0, left: 0,
           height: '100vh', width: 380,

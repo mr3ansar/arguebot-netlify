@@ -129,13 +129,13 @@ export default function Home() {
     <div style={{ position: 'relative', minHeight: '100vh' }}>
 
       {/* Background blobs */}
-      <div style={{
+      <div className="bg-blob-top" style={{
         position: 'fixed', width: 400, height: 400,
         background: 'rgba(232,37,26,0.07)', borderRadius: '50%',
         filter: 'blur(80px)', top: -100, right: -100,
         pointerEvents: 'none', zIndex: 1,
       }} />
-      <div style={{
+      <div className="bg-blob-bottom" style={{
         position: 'fixed', width: 300, height: 300,
         background: 'rgba(232,37,26,0.04)', borderRadius: '50%',
         filter: 'blur(80px)', bottom: 100, left: -80,
@@ -143,11 +143,11 @@ export default function Home() {
       }} />
 
       <ModeSidebar selected={mode} onChange={setMode} />
-      <div style={{ position: 'relative', zIndex: 5, marginLeft: 72 }}>
+      <div className="main-content" style={{ position: 'relative', zIndex: 5, marginLeft: 72 }}>
         <Navbar onOpenHistory={() => setSidebarOpen(true)} historyCount={history.length} />
 
         {/* Hero */}
-        <div style={{
+        <div className="hero-section" style={{
           textAlign: 'center', padding: '60px 20px 40px',
           maxWidth: 800, margin: '0 auto',
           animation: 'fadeInUp 0.7s ease both',
@@ -169,7 +169,7 @@ export default function Home() {
             AI-Powered Fact Checker
           </div>
 
-          <h1 style={{
+          <h1 className="hero-heading" style={{
             fontFamily: "'Bebas Neue', sans-serif",
             fontSize: 'clamp(64px, 10vw, 110px)',
             lineHeight: 0.92, letterSpacing: 3,
@@ -188,11 +188,11 @@ export default function Home() {
         </div>
 
         {/* Input Card */}
-        <div style={{
+        <div className="input-card-wrapper" style={{
           maxWidth: 780, margin: '0 auto', padding: '0 20px',
           animation: 'fadeInUp 0.7s ease 0.15s both',
         }}>
-          <div style={{
+          <div className="input-card" style={{
             background: 'var(--charcoal-2)',
             border: '1px solid rgba(255,255,255,0.07)',
             borderRadius: 40, padding: 28,
@@ -252,7 +252,7 @@ export default function Home() {
             </div>
 
             {/* Submit row */}
-            <div style={{
+            <div className="submit-row" style={{
               display: 'flex', alignItems: 'center',
               justifyContent: 'space-between', marginTop: 20, gap: 12,
             }}>
@@ -286,6 +286,7 @@ export default function Home() {
               <button
                 onClick={() => handleJudge()}
                 disabled={!argument.trim() || loading || !!rateLimitReset}
+                className="judge-btn"
                 style={{
                   display: 'flex', alignItems: 'center', gap: 10,
                   background: argument.trim() && !loading && !rateLimitReset ? 'var(--red)' : 'var(--charcoal-3)',
@@ -333,18 +334,18 @@ export default function Home() {
 
         {/* Loading */}
         {loading && (
-          <div style={{ maxWidth: 780, margin: '32px auto 0', padding: '0 20px' }}>
+          <div className="loading-card" style={{ maxWidth: 780, margin: '32px auto 0', padding: '0 20px' }}>
             <LoadingVerdict currentStep={loadStep} />
           </div>
         )}
 
         {/* Score context + retry tones (verdict only) */}
         {verdict && !loading && scoreCtx && (
-          <div style={{
+          <div className="score-context-wrapper" style={{
             maxWidth: 780, margin: '24px auto 0', padding: '0 20px',
             animation: 'fadeInUp 0.4s ease both',
           }}>
-            <div style={{
+            <div className="score-context-bar" style={{
               background: 'var(--charcoal-2)',
               border: '1px solid ' + scoreCtx.color + '33',
               borderRadius: 20, padding: '14px 20px',
@@ -365,7 +366,7 @@ export default function Home() {
                 </span>
               </div>
 
-              <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>
+              <div className="retry-tones" style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>
                 <span style={{
                   fontSize: 11, color: 'var(--muted)',
                   fontWeight: 600, letterSpacing: 1, textTransform: 'uppercase',
@@ -400,7 +401,7 @@ export default function Home() {
 
         {/* Result — verdict or debate */}
         {!loading && (verdict || debate) && (
-          <div ref={resultRef} style={{ maxWidth: 780, margin: '16px auto 0', padding: '0 20px' }}>
+          <div ref={resultRef} className="result-wrapper" style={{ maxWidth: 780, margin: '16px auto 0', padding: '0 20px' }}>
             {verdict && <VerdictCard verdict={verdict} argument={argument} />}
             {debate  && <DebateCard  debate={debate}   argument={argument} />}
           </div>

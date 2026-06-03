@@ -53,7 +53,7 @@ export default function VerdictCard({ verdict, argument }: Props) {
   const paperEvidence = verdict.evidence.filter(e => e.type === 'paper')
 
   return (
-    <div style={{
+    <div className="verdict-card" style={{
       background: 'var(--white)',
       borderRadius: 40,
       overflow: 'hidden',
@@ -62,7 +62,7 @@ export default function VerdictCard({ verdict, argument }: Props) {
     }}>
 
       {/* Header */}
-      <div style={{
+      <div className="verdict-header" style={{
         background: 'var(--red)',
         padding: '20px 28px',
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
@@ -79,7 +79,7 @@ export default function VerdictCard({ verdict, argument }: Props) {
             </div>
           </div>
         </div>
-        <div style={{
+        <div className="verdict-score" style={{
           background: 'white', color: 'var(--red)',
           fontFamily: "'Bebas Neue', sans-serif",
           fontSize: 28, letterSpacing: 1,
@@ -89,10 +89,10 @@ export default function VerdictCard({ verdict, argument }: Props) {
       </div>
 
       {/* Body */}
-      <div style={{ padding: 28, background: 'var(--white)', color: 'var(--charcoal)' }}>
+      <div className="verdict-body" style={{ padding: 28, background: 'var(--white)', color: 'var(--charcoal)' }}>
 
         {/* Ruling */}
-        <div style={{
+        <div className="verdict-ruling" style={{
           fontFamily: "'Bebas Neue', sans-serif",
           fontSize: 34, letterSpacing: 2,
           color: rulingColor, marginBottom: 16,
