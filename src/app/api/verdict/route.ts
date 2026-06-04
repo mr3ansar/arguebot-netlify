@@ -6,6 +6,7 @@ import { Tone, VerdictResult, EvidenceItem } from '@/lib/types'
 import { shouldSearchPapers, searchOpenAlex, formatPapersForPrompt, OpenAlexPaper } from '@/lib/openAlex'
 import { Mode, DebateResult, DebateTurn } from '@/lib/modes'
 import { ADVOCATE_PROMPT, SKEPTIC_PROMPT, JUDGE_PROMPT } from '@/lib/debatePrompts'
+import { createRouteSupabase } from '@/lib/supabaseRoute'
 
 export const dynamic = 'force-dynamic'
 
@@ -262,14 +263,20 @@ export async function POST(req: NextRequest) {
 
   const { argument, tone, useSearch, mode = 'moderate' } = body
 
+  // Get user from session if authenticated
+  const res = NextResponse.next()
+  const supabase = createRouteSupabase(req, res)
+  const { data: { user } } = await supabase.auth.getUser()
+  const userId = user?.id
+
   // Rate limit per mode (dynamic import defers module evaluation to runtime)
-  const { checkRateLimit, getLiteLimiter, getModerateLimiter, getHeavyLimiter } =
+  const { checkRateLimit, getLiteLimiter, getModerateLimiter, getHeavyLimiter, getLiteLimiterAuth, getModerateLimiterAuth, getHeavyLimiterAuth } =
     await import('@/lib/rateLimit')
   const limiter =
-    mode === 'lite'  ? getLiteLimiter() :
-    mode === 'heavy' ? getHeavyLimiter() :
-    getModerateLimiter()
-  const rl = await checkRateLimit(limiter, req)
+    mode === 'lite'  ? (userId ? getLiteLimiterAuth() : getLiteLimiter()) :
+    mode === 'heavy' ? (userId ? getHeavyLimiterAuth() : getHeavyLimiter()) :
+    (userId ? getModerateLimiterAuth() : getModerateLimiter())
+  const rl = await checkRateLimit(limiter, req, userId)
   const headers = {
     'X-RateLimit-Limit':     String(rl.limit),
     'X-RateLimit-Remaining': String(rl.remaining),

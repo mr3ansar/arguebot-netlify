@@ -6,10 +6,13 @@ import { Redis } from '@upstash/redis'
 // This prevents build failures when env vars aren't available during Next.js
 // static page collection
 
-let _redis:    Redis       | null = null
-let _lite:     Ratelimit   | null = null
-let _moderate: Ratelimit   | null = null
-let _heavy:    Ratelimit   | null = null
+let _redis:       Redis       | null = null
+let _lite:        Ratelimit   | null = null
+let _moderate:    Ratelimit   | null = null
+let _heavy:       Ratelimit   | null = null
+let _liteAuth:    Ratelimit   | null = null
+let _moderateAuth: Ratelimit  | null = null
+let _heavyAuth:   Ratelimit   | null = null
 
 function getRedis(): Redis {
   if (_redis) return _redis
@@ -53,6 +56,39 @@ export function getHeavyLimiter(): Ratelimit {
   return _heavy
 }
 
+export function getLiteLimiterAuth(): Ratelimit {
+  if (_liteAuth) return _liteAuth
+  _liteAuth = new Ratelimit({
+    redis:     getRedis(),
+    limiter:   Ratelimit.slidingWindow(40, '1 m'),
+    analytics: true,
+    prefix:    'arguebot:lite:auth',
+  })
+  return _liteAuth
+}
+
+export function getModerateLimiterAuth(): Ratelimit {
+  if (_moderateAuth) return _moderateAuth
+  _moderateAuth = new Ratelimit({
+    redis:     getRedis(),
+    limiter:   Ratelimit.slidingWindow(20, '1 m'),
+    analytics: true,
+    prefix:    'arguebot:moderate:auth',
+  })
+  return _moderateAuth
+}
+
+export function getHeavyLimiterAuth(): Ratelimit {
+  if (_heavyAuth) return _heavyAuth
+  _heavyAuth = new Ratelimit({
+    redis:     getRedis(),
+    limiter:   Ratelimit.slidingWindow(6, '1 m'),
+    analytics: true,
+    prefix:    'arguebot:heavy:auth',
+  })
+  return _heavyAuth
+}
+
 // Keep backward compat alias
 export const verdictLimiter = { limit: (...args: Parameters<Ratelimit['limit']>) => getModerateLimiter().limit(...args) }
 
@@ -65,14 +101,16 @@ export interface RateLimitResult {
 
 export async function checkRateLimit(
   limiter: Ratelimit | { limit: Function },
-  req: Request
+  req: Request,
+  userId?: string
 ): Promise<RateLimitResult> {
-  const ip =
+  const identifier =
+    userId ??
     req.headers.get('x-forwarded-for')?.split(',')[0].trim() ??
     req.headers.get('x-real-ip') ??
     '127.0.0.1'
 
-  const result = await (limiter as Ratelimit).limit(ip)
+  const result = await (limiter as Ratelimit).limit(identifier)
   return {
     success:   result.success,
     limit:     result.limit,

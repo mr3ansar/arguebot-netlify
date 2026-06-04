@@ -49,4 +49,12 @@ export interface HistoryItem {
   argument: string
   verdict: VerdictResult
   createdAt: string
+  userId?: string
+}
+
+export interface AuthUser {
+  id: string
+  email: string | undefined
+  name: string | undefined
+  avatar: string | undefined
 }

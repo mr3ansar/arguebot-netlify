@@ -21,7 +21,7 @@ interface Props {
   onDelete: (id: string) => void
 }
 
-export default function HistorySidebar({ open, onClose, items, loading, onSelect, onDelete }: Props) {
+export default function HistorySidebar({ open, onClose, items, loading, onSelect, onDelete, userId }: Props & { userId?: string }) {
   const sidebarRef                        = useRef<HTMLDivElement>(null)
   const [deletingId, setDeletingId]       = useState<string | null>(null)
   const [confirmId, setConfirmId]         = useState<string | null>(null)
@@ -69,7 +69,7 @@ export default function HistorySidebar({ open, onClose, items, loading, onSelect
     // Second click — actually delete
     setDeletingId(id)
     setConfirmId(null)
-    const success = await deleteVerdict(id)
+    const success = await deleteVerdict(id, userId)
     setDeletingId(null)
     if (success) onDelete(id)
   }
@@ -161,6 +161,26 @@ export default function HistorySidebar({ open, onClose, items, loading, onSelect
                   height: 90, opacity: 0.4,
                 }} />
               ))}
+            </div>
+          ) : items.length === 0 && !userId ? (
+            <div style={{ textAlign: 'center', padding: '60px 20px', color: 'var(--muted)' }}>
+              <div style={{ fontSize: 40, marginBottom: 12 }}>🔒</div>
+              <div style={{
+                fontFamily: "'Bebas Neue', sans-serif",
+                fontSize: 20, letterSpacing: 2,
+                color: 'var(--white)', marginBottom: 6,
+              }}>SIGN IN TO SAVE HISTORY</div>
+              <div style={{ fontSize: 13, lineHeight: 1.5, marginBottom: 16 }}>
+                Create a free account to save your<br />verdicts and get 2x rate limits.
+              </div>
+              <a href="/signup" style={{
+                display: 'inline-block', padding: '10px 24px',
+                background: 'var(--red)', color: 'white',
+                borderRadius: 16, textDecoration: 'none',
+                fontFamily: "'Bebas Neue', sans-serif",
+                fontSize: 16, letterSpacing: 1.5,
+                boxShadow: '0 4px 14px var(--red-glow)',
+              }}>SIGN UP FREE</a>
             </div>
           ) : items.length === 0 ? (
             <div style={{ textAlign: 'center', padding: '60px 20px', color: 'var(--muted)' }}>

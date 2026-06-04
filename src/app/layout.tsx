@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import './globals.css'
+import AuthProvider from '@/components/AuthProvider'
 
 export const metadata: Metadata = {
   title: 'ArgueBot — Are You Actually Right?',
@@ -7,10 +8,10 @@ export const metadata: Metadata = {
   keywords: ['fact checker', 'argument checker', 'ai debate', 'are you right', 'arguebot'],
   authors: [{ name: 'ArgueBot' }],
   creator: 'ArgueBot',
-  metadataBase: new URL('https://arguebot.app'),
+  metadataBase: new URL('https://arguebot.vercel.app'),
   openGraph: {
     type:        'website',
-    url:         'https://arguebot.app',
+    url:         'https://arguebot.vercel.app',
     title:       'ArgueBot — Are You Actually Right?',
     description: 'Drop your argument. AI searches the web, weighs the facts, and delivers the verdict with zero mercy and maximum personality.',
     siteName:    'ArgueBot',
@@ -41,7 +42,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body suppressHydrationWarning>{children}</body>
+      <body suppressHydrationWarning>
+        <AuthProvider>{children}</AuthProvider>
+      </body>
     </html>
   )
 }

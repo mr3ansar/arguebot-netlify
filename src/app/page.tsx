@@ -15,8 +15,10 @@ import { Tone, VerdictResult, HistoryItem, TONES } from '@/lib/types'
 import { Mode, DebateResult } from '@/lib/modes'
 import { saveVerdict, fetchHistory } from '@/lib/history'
 import { getScoreContext } from '@/lib/scoreContext'
+import { useAuth } from '@/components/AuthProvider'
 
 export default function Home() {
+  const { user } = useAuth()
   const [argument, setArgument]   = useState('')
   const [tone, setTone]           = useState<Tone>('hype')
   const [mode, setMode]           = useState<Mode>('moderate')
@@ -41,13 +43,13 @@ export default function Home() {
     return () => clearTimeout(timer)
   }, [rateLimitReset])
 
-  // Load history on mount
+  // Load history on mount (and when user changes)
   useEffect(() => {
-    fetchHistory().then(items => {
+    fetchHistory(10, user?.id).then(items => {
       setHistory(items)
       setHistoryLoading(false)
     })
-  }, [])
+  }, [user?.id])
 
   const handleJudge = async (argOverride?: string) => {
     const finalArg = argOverride ?? argument
@@ -84,8 +86,8 @@ export default function Home() {
         } else {
           const v = data.data as VerdictResult
           setVerdict(v)
-          await saveVerdict(finalArg, v)
-          const updated = await fetchHistory()
+          await saveVerdict(finalArg, v, user?.id)
+          const updated = await fetchHistory(10, user?.id)
           setHistory(updated)
         }
 
@@ -418,6 +420,7 @@ export default function Home() {
         loading={historyLoading}
         onSelect={handleHistorySelect}
         onDelete={handleDelete}
+        userId={user?.id}
       />
     </div>
   )
