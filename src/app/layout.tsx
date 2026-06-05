@@ -5,31 +5,31 @@ import Footer from '@/components/Footer'
 import CookieConsent from '@/components/CookieConsent'
 
 export const metadata: Metadata = {
-  title: 'ArgueBot — Are You Actually Right?',
+  title: 'ArgueBoss — Are You Actually Right?',
   description: 'Drop your argument. AI searches the web, weighs the facts, and delivers the verdict with zero mercy and maximum personality.',
-  keywords: ['fact checker', 'argument checker', 'ai debate', 'are you right', 'arguebot'],
-  authors: [{ name: 'ArgueBot' }],
-  creator: 'ArgueBot',
+  keywords: ['fact checker', 'argument checker', 'ai debate', 'are you right', 'argueboss'],
+  authors: [{ name: 'ArgueBoss' }],
+  creator: 'ArgueBoss',
   metadataBase: new URL('https://arguebot.vercel.app'),
   openGraph: {
     type:        'website',
     url:         'https://arguebot.vercel.app',
-    title:       'ArgueBot — Are You Actually Right?',
+    title:       'ArgueBoss — Are You Actually Right?',
     description: 'Drop your argument. AI searches the web, weighs the facts, and delivers the verdict with zero mercy and maximum personality.',
-    siteName:    'ArgueBot',
+    siteName:    'ArgueBoss',
     images: [{
       url:    '/api/og',
       width:  1200,
       height: 630,
-      alt:    'ArgueBot — AI Fact Checker',
+      alt:    'ArgueBoss — AI Fact Checker',
     }],
   },
   twitter: {
     card:        'summary_large_image',
-    title:       'ArgueBot — Are You Actually Right?',
+    title:       'ArgueBoss — Are You Actually Right?',
     description: 'Drop your argument. AI searches the web and delivers the verdict — with zero mercy.',
     images:      ['/api/og'],
-    creator:     '@arguebot',
+    creator:     '@argueboss',
   },
   robots: {
     index:  true,

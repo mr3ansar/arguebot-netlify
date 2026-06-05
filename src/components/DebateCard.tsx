@@ -32,10 +32,10 @@ export default function DebateCard({ debate, argument }: Props) {
   }
 
   const handleShare = async () => {
-    const text = '⚔️ ArgueBot Debate Verdict: ' + debate.ruling + ' (' + debate.score + '%)\n\n' +
+    const text = '⚔️ ArgueBoss Debate Verdict: ' + debate.ruling + ' (' + debate.score + '%)\n\n' +
       debate.turns.find(t => t.role === 'judge')?.content.slice(0, 120) + '...\n\nGet your argument debated at arguebot.app'
     if (navigator.share) {
-      await navigator.share({ title: 'My ArgueBot Debate', text })
+      await navigator.share({ title: 'My ArgueBoss Debate', text })
     } else {
       await navigator.clipboard.writeText(text)
       setCopied(true)

@@ -18,7 +18,7 @@ export default function Footer() {
       zIndex: 5,
     }}>
       <span>
-        &copy; {new Date().getFullYear()} ArgueBot. For entertainment purposes only.
+        &copy; {new Date().getFullYear()} ArgueBoss. For entertainment purposes only.
       </span>
       <div style={{ display: 'flex', gap: 16 }}>
         <Link href="/privacy" style={{ color: 'var(--muted)', textDecoration: 'none', transition: 'color 0.2s' }}

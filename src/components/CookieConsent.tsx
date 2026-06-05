@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 
-const CONSENT_KEY = 'arguebot_cookie_consent'
+const CONSENT_KEY = 'argueboss_cookie_consent'
 
 export default function CookieConsent() {
   const [visible, setVisible] = useState(false)
@@ -48,7 +48,7 @@ export default function CookieConsent() {
         lineHeight: 1.5,
         textAlign: 'center',
       }}>
-        ArgueBot uses Supabase auth cookies for login functionality only.{' '}
+        ArgueBoss uses Supabase auth cookies for login functionality only.{' '}
         No tracking or advertising cookies are used.{' '}
         <Link href="/privacy" style={{ color: 'var(--red-light)', textDecoration: 'underline' }}>
           Learn more

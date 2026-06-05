@@ -368,7 +368,7 @@ export default function HistorySidebar({ open, onClose, items, loading, onSelect
             fontSize: 11, color: 'rgba(255,255,255,0.2)',
             textAlign: 'center', fontFamily: "'DM Mono', monospace",
           }}>
-            arguebot · all verdicts are final
+            argueboss · all verdicts are final
           </div>
         </div>
       </div>

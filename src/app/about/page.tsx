@@ -2,8 +2,8 @@ import Link from 'next/link'
 import Navbar from '@/components/Navbar'
 
 export const metadata = {
-  title: 'About — ArgueBot',
-  description: 'ArgueBot is an AI-powered argument fact-checker that delivers verdicts with personality.',
+  title: 'About — ArgueBoss',
+  description: 'ArgueBoss is an AI-powered argument fact-checker that delivers verdicts with personality.',
 }
 
 export default function AboutPage() {
@@ -43,7 +43,7 @@ export default function AboutPage() {
               fontSize: 12, fontWeight: 600,
               letterSpacing: '1.5px', textTransform: 'uppercase',
               padding: '6px 16px', borderRadius: 100, marginBottom: 20,
-            }}>About ArgueBot</div>
+            }}>About ArgueBoss</div>
 
             <h1 style={{
               fontFamily: "'Bebas Neue', sans-serif",
@@ -59,7 +59,7 @@ export default function AboutPage() {
               fontSize: 17, fontWeight: 300,
               color: 'var(--muted)', lineHeight: 1.7,
             }}>
-              ArgueBot is an AI-powered fact checker that searches the web in real time,
+              ArgueBoss is an AI-powered fact checker that searches the web in real time,
               weighs the evidence, and delivers a verdict on your argument — with personality,
               zero neutrality, and maximum entertainment value.
             </p>
@@ -205,7 +205,7 @@ export default function AboutPage() {
             </div>
 
             <p style={{ fontSize: 14, color: 'var(--muted)', lineHeight: 1.7, marginBottom: 20 }}>
-              We believe in being upfront about data. Here is exactly what ArgueBot collects and why.
+              We believe in being upfront about data. Here is exactly what ArgueBoss collects and why.
             </p>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>

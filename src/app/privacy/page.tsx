@@ -2,8 +2,8 @@ import Link from 'next/link'
 import Navbar from '@/components/Navbar'
 
 export const metadata = {
-  title: 'Privacy Policy — ArgueBot',
-  description: 'How ArgueBot collects, uses, and protects your data.',
+  title: 'Privacy Policy — ArgueBoss',
+  description: 'How ArgueBoss collects, uses, and protects your data.',
 }
 
 export default function PrivacyPage() {
@@ -60,7 +60,7 @@ export default function PrivacyPage() {
             borderRadius: 32, padding: 32, marginBottom: 24,
           }}>
             <Section title="What We Collect">
-              <p>ArgueBot collects only the data necessary to provide the service:</p>
+              <p>ArgueBoss collects only the data necessary to provide the service:</p>
               <ul>
                 <li><strong>Account information</strong> — email address and password (if you sign up). If you use Google OAuth, we receive your email, name, and avatar URL from Google.</li>
                 <li><strong>Arguments and verdicts</strong> — the text you submit and the resulting verdict are stored to show you your history.</li>
@@ -103,7 +103,7 @@ export default function PrivacyPage() {
             </Section>
 
             <Section title="Cookies">
-              <p>ArgueBot only uses Supabase auth session cookies (essential for login functionality). These are first-party, necessary cookies. No analytics, tracking, or advertising cookies are used.</p>
+              <p>ArgueBoss only uses Supabase auth session cookies (essential for login functionality). These are first-party, necessary cookies. No analytics, tracking, or advertising cookies are used.</p>
             </Section>
 
             <Section title="Contact">
@@ -122,7 +122,7 @@ export default function PrivacyPage() {
               boxShadow: '0 6px 24px var(--red-glow)',
               transition: 'all 0.2s',
             }}>
-              BACK TO ARGUEBOT
+              BACK TO ARGUEBOSS
             </Link>
           </div>
         </div>

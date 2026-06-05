@@ -58,7 +58,7 @@ function buildCardHTML(verdict: VerdictResult, argument: string): string {
       '<div style="background:#E8251A;padding:22px 32px;display:flex;align-items:center;justify-content:space-between;">' +
         '<div style="display:flex;align-items:center;gap:12px;">' +
           '<div style="width:38px;height:38px;background:white;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:20px;color:#E8251A;font-family:' + FONT_BODY + ';">A</div>' +
-          '<span style="font-weight:900;font-size:24px;letter-spacing:3px;color:white;text-transform:uppercase;font-family:' + FONT_BODY + ';">ARGUEBOT</span>' +
+          '<span style="font-weight:900;font-size:24px;letter-spacing:3px;color:white;text-transform:uppercase;font-family:' + FONT_BODY + ';">ARGUEBOSS</span>' +
         '</div>' +
         '<div style="background:white;color:#E8251A;font-weight:900;font-size:34px;padding:8px 22px;border-radius:14px;font-family:' + FONT_BODY + ';">' + verdict.score + '%</div>' +
       '</div>' +
@@ -145,7 +145,7 @@ export async function downloadVerdictCard(verdict: VerdictResult, argument: stri
     })
 
     const link    = document.createElement('a')
-    link.download = 'arguebot-' + verdict.ruling.toLowerCase().replace(/\s/g, '-') + '.png'
+    link.download = 'argueboss-' + verdict.ruling.toLowerCase().replace(/\s/g, '-') + '.png'
     link.href     = canvas.toDataURL('image/png')
     link.click()
 
@@ -182,7 +182,7 @@ function buildDebateCardHTML(debate: DebateResult, argument: string): string {
         '<div style="display:flex;align-items:center;gap:12px;">' +
           '<div style="width:38px;height:38px;background:#E8251A;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:20px;color:white;font-family:' + FONT_BODY + ';">A</div>' +
           '<div>' +
-            '<div style="font-weight:900;font-size:18px;letter-spacing:3px;color:white;text-transform:uppercase;font-family:' + FONT_BODY + ';">ARGUEBOT</div>' +
+            '<div style="font-weight:900;font-size:18px;letter-spacing:3px;color:white;text-transform:uppercase;font-family:' + FONT_BODY + ';">ARGUEBOSS</div>' +
             '<div style="font-size:10px;color:#555;letter-spacing:1px;text-transform:uppercase;font-family:' + FONT_BODY + ';">3-AI DEBATE · HEAVY MODE</div>' +
           '</div>' +
         '</div>' +
@@ -282,7 +282,7 @@ export async function downloadDebateCard(debate: DebateResult, argument: string,
     })
 
     const link    = document.createElement('a')
-    link.download = 'arguebot-debate-' + debate.ruling.toLowerCase().replace(/\s/g, '-') + '.png'
+    link.download = 'argueboss-debate-' + debate.ruling.toLowerCase().replace(/\s/g, '-') + '.png'
     link.href     = canvas.toDataURL('image/png')
     link.click()
 

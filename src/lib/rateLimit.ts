@@ -29,7 +29,7 @@ export function getLiteLimiter(): Ratelimit {
     redis:     getRedis(),
     limiter:   Ratelimit.slidingWindow(20, '1 m'),
     analytics: true,
-    prefix:    'arguebot:lite',
+    prefix:    'argueboss:lite',
   })
   return _lite
 }
@@ -40,7 +40,7 @@ export function getModerateLimiter(): Ratelimit {
     redis:     getRedis(),
     limiter:   Ratelimit.slidingWindow(10, '1 m'),
     analytics: true,
-    prefix:    'arguebot:moderate',
+    prefix:    'argueboss:moderate',
   })
   return _moderate
 }
@@ -51,7 +51,7 @@ export function getHeavyLimiter(): Ratelimit {
     redis:     getRedis(),
     limiter:   Ratelimit.slidingWindow(3, '1 m'),
     analytics: true,
-    prefix:    'arguebot:heavy',
+    prefix:    'argueboss:heavy',
   })
   return _heavy
 }
@@ -62,7 +62,7 @@ export function getLiteLimiterAuth(): Ratelimit {
     redis:     getRedis(),
     limiter:   Ratelimit.slidingWindow(40, '1 m'),
     analytics: true,
-    prefix:    'arguebot:lite:auth',
+    prefix:    'argueboss:lite:auth',
   })
   return _liteAuth
 }
@@ -73,7 +73,7 @@ export function getModerateLimiterAuth(): Ratelimit {
     redis:     getRedis(),
     limiter:   Ratelimit.slidingWindow(20, '1 m'),
     analytics: true,
-    prefix:    'arguebot:moderate:auth',
+    prefix:    'argueboss:moderate:auth',
   })
   return _moderateAuth
 }
@@ -84,7 +84,7 @@ export function getHeavyLimiterAuth(): Ratelimit {
     redis:     getRedis(),
     limiter:   Ratelimit.slidingWindow(6, '1 m'),
     analytics: true,
-    prefix:    'arguebot:heavy:auth',
+    prefix:    'argueboss:heavy:auth',
   })
   return _heavyAuth
 }

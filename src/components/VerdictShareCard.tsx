@@ -57,7 +57,7 @@ export default function VerdictShareCard({ verdict, argument }: Props) {
             fontWeight: 900,
             fontSize: 22, letterSpacing: 3,
             color: 'white', textTransform: 'uppercase',
-          }}>ArgueBot</span>
+          }}>ArgueBoss</span>
         </div>
 
         {/* Score badge */}

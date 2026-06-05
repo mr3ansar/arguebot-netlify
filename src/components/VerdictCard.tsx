@@ -39,9 +39,9 @@ export default function VerdictCard({ verdict, argument }: Props) {
   }
 
   const handleShare = async () => {
-    const text = `🤖 ArgueBot says I'm ${verdict.ruling} (${verdict.score}%)\n\n${verdict.summary.slice(0, 120)}...\n\nGet judged at arguebot.app`
+    const text = `🤖 ArgueBoss says I'm ${verdict.ruling} (${verdict.score}%)\n\n${verdict.summary.slice(0, 120)}...\n\nGet judged at arguebot.app`
     if (navigator.share) {
-      await navigator.share({ title: 'My ArgueBot Verdict', text })
+      await navigator.share({ title: 'My ArgueBoss Verdict', text })
     } else {
       await navigator.clipboard.writeText(text)
       setCopied(true)

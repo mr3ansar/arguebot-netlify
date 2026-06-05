@@ -61,7 +61,7 @@ export async function GET() {
             letterSpacing: 6,
             color: 'white',
             textTransform: 'uppercase',
-          }}>ARGUEBOT</span>
+          }}>ARGUEBOSS</span>
         </div>
 
         {/* Main headline */}
