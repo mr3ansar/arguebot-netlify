@@ -88,15 +88,7 @@ export default function Navbar({ onOpenHistory, historyCount = 0 }: Props) {
         )}
 
         {/* Logo */}
-        <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 10 }}>
-          <div style={{
-            width: 38, height: 38, background: 'var(--red)',
-            borderRadius: 10, display: 'flex',
-            alignItems: 'center', justifyContent: 'center',
-            fontFamily: "'Bebas Neue', sans-serif",
-            fontSize: 20, color: 'white',
-            boxShadow: '0 4px 16px var(--red-glow)',
-          }}>A</div>
+        <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center' }}>
           <span style={{
             fontFamily: "'Bebas Neue', sans-serif",
             fontSize: 26, letterSpacing: 2, color: 'var(--white)',
