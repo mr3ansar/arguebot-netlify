@@ -65,11 +65,8 @@ function buildCardHTML(verdict: VerdictResult, argument: string): string {
 
       // ── Header ──
       '<div style="background:#E8251A;padding:22px 32px;display:flex;align-items:center;justify-content:space-between;">' +
-        '<div style="display:flex;align-items:center;gap:12px;">' +
-          '<div style="width:38px;height:38px;background:white;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:20px;color:#E8251A;font-family:' + FONT_BODY + ';">A</div>' +
-          '<span style="font-weight:900;font-size:24px;letter-spacing:3px;color:white;text-transform:uppercase;font-family:' + FONT_BODY + ';">ARGUEBOSS</span>' +
-        '</div>' +
-        '<div style="background:white;color:#E8251A;font-weight:900;font-size:34px;padding:8px 22px;border-radius:14px;font-family:' + FONT_BODY + ';">' + verdict.score + '%</div>' +
+        '<span style="font-weight:900;font-size:24px;letter-spacing:3px;color:white;text-transform:uppercase;font-family:' + FONT_BODY + ';">ARGUEBOSS</span>' +
+        '<div style="background:white;color:#E8251A;font-weight:900;font-size:34px;padding:8px 22px;border-radius:14px;display:flex;align-items:center;justify-content:center;line-height:1;font-family:' + FONT_BODY + ';">' + verdict.score + '%</div>' +
       '</div>' +
 
       // ── Ruling band ──
@@ -188,14 +185,11 @@ function buildDebateCardHTML(debate: DebateResult, argument: string): string {
 
       // Header
       '<div style="background:#1A1A1A;border-bottom:2px solid #333;padding:22px 32px;display:flex;align-items:center;justify-content:space-between;">' +
-        '<div style="display:flex;align-items:center;gap:12px;">' +
-          '<div style="width:38px;height:38px;background:#E8251A;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:20px;color:white;font-family:' + FONT_BODY + ';">A</div>' +
-          '<div>' +
-            '<div style="font-weight:900;font-size:18px;letter-spacing:3px;color:white;text-transform:uppercase;font-family:' + FONT_BODY + ';">ARGUEBOSS</div>' +
-            '<div style="font-size:10px;color:#555;letter-spacing:1px;text-transform:uppercase;font-family:' + FONT_BODY + ';">3-AI DEBATE · HEAVY MODE</div>' +
-          '</div>' +
+        '<div>' +
+          '<div style="font-weight:900;font-size:18px;letter-spacing:3px;color:white;text-transform:uppercase;font-family:' + FONT_BODY + ';">ARGUEBOSS</div>' +
+          '<div style="font-size:10px;color:#555;letter-spacing:1px;text-transform:uppercase;font-family:' + FONT_BODY + ';">3-AI DEBATE · HEAVY MODE</div>' +
         '</div>' +
-        '<div style="background:#E8251A;color:white;font-weight:900;font-size:28px;padding:6px 18px;border-radius:12px;font-family:' + FONT_BODY + ';">' + debate.score + '%</div>' +
+        '<div style="background:#E8251A;color:white;font-weight:900;font-size:28px;padding:6px 18px;border-radius:12px;display:flex;align-items:center;justify-content:center;line-height:1;font-family:' + FONT_BODY + ';">' + debate.score + '%</div>' +
       '</div>' +
 
       // Ruling band
