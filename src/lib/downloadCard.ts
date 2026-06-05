@@ -66,7 +66,7 @@ function buildCardHTML(verdict: VerdictResult, argument: string): string {
       // ── Header ──
       '<div style="background:#E8251A;padding:22px 32px;display:flex;align-items:center;justify-content:space-between;">' +
         '<span style="font-weight:900;font-size:24px;letter-spacing:3px;color:white;text-transform:uppercase;font-family:' + FONT_BODY + ';">ARGUEBOSS</span>' +
-        '<div style="background:white;color:#E8251A;font-weight:900;font-size:34px;padding:8px 22px;border-radius:14px;display:flex;align-items:center;justify-content:center;line-height:1;font-family:' + FONT_BODY + ';">' + verdict.score + '%</div>' +
+        '<div style="background:white;color:#E8251A;font-weight:900;font-size:34px;line-height:50px;height:50px;padding:0 22px;border-radius:14px;font-family:' + FONT_BODY + ';">' + verdict.score + '%</div>' +
       '</div>' +
 
       // ── Ruling band ──
@@ -113,7 +113,7 @@ function buildCardHTML(verdict: VerdictResult, argument: string): string {
           '<div style="display:flex;align-items:center;gap:6px;background:#2E2E2E;color:#cccccc;font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;padding:7px 14px;border-radius:100px;font-family:' + FONT_BODY + ';">' +
             (tone?.emoji ?? '') + ' ' + (tone?.label ?? '') + ' MODE' +
           '</div>' +
-          '<div style="font-size:12px;color:#555555;font-family:' + FONT_BODY + ';">arguebot.app</div>' +
+          '<div style="font-size:12px;color:#555555;font-family:' + FONT_BODY + ';">argueboss.netlify.app</div>' +
         '</div>' +
 
       '</div>' +
@@ -189,7 +189,7 @@ function buildDebateCardHTML(debate: DebateResult, argument: string): string {
           '<div style="font-weight:900;font-size:18px;letter-spacing:3px;color:white;text-transform:uppercase;font-family:' + FONT_BODY + ';">ARGUEBOSS</div>' +
           '<div style="font-size:10px;color:#555;letter-spacing:1px;text-transform:uppercase;font-family:' + FONT_BODY + ';">3-AI DEBATE · HEAVY MODE</div>' +
         '</div>' +
-        '<div style="background:#E8251A;color:white;font-weight:900;font-size:28px;padding:6px 18px;border-radius:12px;display:flex;align-items:center;justify-content:center;line-height:1;font-family:' + FONT_BODY + ';">' + debate.score + '%</div>' +
+        '<div style="background:#E8251A;color:white;font-weight:900;font-size:28px;line-height:40px;height:40px;padding:0 18px;border-radius:12px;font-family:' + FONT_BODY + ';">' + debate.score + '%</div>' +
       '</div>' +
 
       // Ruling band
@@ -249,7 +249,7 @@ function buildDebateCardHTML(debate: DebateResult, argument: string): string {
         // Footer
         '<div style="display:flex;align-items:center;justify-content:space-between;padding-top:14px;border-top:1px solid rgba(255,255,255,0.08);">' +
           '<div style="background:#2E2E2E;color:#ccc;font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;padding:6px 12px;border-radius:100px;font-family:' + FONT_BODY + ';">\u2694\uFE0F ' + toneLabel + ' MODE</div>' +
-          '<div style="font-size:11px;color:#555;font-family:' + FONT_BODY + ';">arguebot.app</div>' +
+          '<div style="font-size:11px;color:#555;font-family:' + FONT_BODY + ';">argueboss.netlify.app</div>' +
         '</div>' +
 
       '</div>' +
