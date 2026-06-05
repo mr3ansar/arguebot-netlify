@@ -23,9 +23,10 @@ const RULING_ICONS: Record<Ruling, string> = {
 interface Props {
   verdict: VerdictResult
   argument?: string
+  mode?: string
 }
 
-export default function VerdictCard({ verdict, argument }: Props) {
+export default function VerdictCard({ verdict, argument, mode }: Props) {
   const tone        = TONES.find(t => t.id === verdict.tone)
   const rulingColor = RULING_COLORS[verdict.ruling]
   const [downloading, setDownloading] = useState(false)
@@ -151,22 +152,22 @@ export default function VerdictCard({ verdict, argument }: Props) {
         )}
 
         {/* Research Papers */}
-        {paperEvidence.length > 0 && (
-          <div style={{ marginBottom: 16 }}>
-            <div style={{
-              fontSize: 11, fontWeight: 700,
-              letterSpacing: '2px', textTransform: 'uppercase',
-              color: 'var(--muted)', marginBottom: 10,
-              display: 'flex', alignItems: 'center', gap: 8,
-            }}>
-              🎓 Research Papers
-              <span style={{
-                background: 'var(--charcoal)', color: 'white',
-                fontSize: 10, fontWeight: 700,
-                letterSpacing: 1, padding: '2px 8px', borderRadius: 100,
-              }}>OpenAlex</span>
-            </div>
+        <div style={{ marginBottom: 16 }}>
+          <div style={{
+            fontSize: 11, fontWeight: 700,
+            letterSpacing: '2px', textTransform: 'uppercase',
+            color: 'var(--muted)', marginBottom: 10,
+            display: 'flex', alignItems: 'center', gap: 8,
+          }}>
+            🎓 Research Papers
+            <span style={{
+              background: 'var(--charcoal)', color: 'white',
+              fontSize: 10, fontWeight: 700,
+              letterSpacing: 1, padding: '2px 8px', borderRadius: 100,
+            }}>OpenAlex</span>
+          </div>
 
+          {paperEvidence.length > 0 ? (
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
               {paperEvidence.map((item, i) => (
                 <div key={i} style={{
@@ -230,8 +231,18 @@ export default function VerdictCard({ verdict, argument }: Props) {
                 </div>
               ))}
             </div>
-          </div>
-        )}
+          ) : (
+            (mode === 'moderate' || mode === 'heavy') && (
+              <div style={{
+                background: 'var(--off-white)', borderRadius: 12,
+                padding: '12px 16px', fontSize: 13, color: 'var(--muted)',
+                fontStyle: 'italic', lineHeight: 1.5,
+              }}>
+                No relevant research papers found.
+              </div>
+            )
+          )}
+        </div>
 
         {/* Twist */}
         {verdict.twist && (

@@ -404,7 +404,7 @@ export default function Home() {
         {/* Result — verdict or debate */}
         {!loading && (verdict || debate) && (
           <div ref={resultRef} className="result-wrapper" style={{ maxWidth: 780, margin: '16px auto 0', padding: '0 20px' }}>
-            {verdict && <VerdictCard verdict={verdict} argument={argument} />}
+            {verdict && <VerdictCard verdict={verdict} argument={argument} mode={mode} />}
             {debate  && <DebateCard  debate={debate}   argument={argument} />}
           </div>
         )}
