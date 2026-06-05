@@ -191,7 +191,7 @@ export default function VerdictShareCard({ verdict, argument }: Props) {
             fontSize: 11, color: '#555',
             fontFamily: 'monospace',
           }}>
-            arguebot.app
+            argueboss.netlify.app
           </div>
         </div>
       </div>

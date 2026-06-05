@@ -39,7 +39,7 @@ export default function VerdictCard({ verdict, argument }: Props) {
   }
 
   const handleShare = async () => {
-    const text = `🤖 ArgueBoss says I'm ${verdict.ruling} (${verdict.score}%)\n\n${verdict.summary.slice(0, 120)}...\n\nGet judged at arguebot.app`
+    const text = `🤖 ArgueBoss says I'm ${verdict.ruling} (${verdict.score}%)\n\n${verdict.summary.slice(0, 120)}...\n\nGet judged at argueboss.netlify.app`
     if (navigator.share) {
       await navigator.share({ title: 'My ArgueBoss Verdict', text })
     } else {

@@ -73,7 +73,7 @@ export async function searchOpenAlex(
     sort:            'relevance_score:desc',
     filter:          'has_abstract:true',
     select:          'id,title,abstract_inverted_index,authorships,publication_year,cited_by_count,doi,primary_location',
-    'mailto':        'arguebot@app.com', // OpenAlex asks for this for better rate limits
+    'mailto':        'argueboss@app.com', // OpenAlex asks for this for better rate limits
   })
 
   let res: Response | null = null

@@ -12,7 +12,7 @@ export async function POST(req: Request) {
     const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY
     if (!serviceRoleKey) {
       return NextResponse.json(
-        { error: 'Account deletion is not configured. Contact support at privacy@arguebot.app.' },
+        { error: 'Account deletion is not configured. Contact support at privacy@argueboss.netlify.app.' },
         { status: 501 }
       )
     }
