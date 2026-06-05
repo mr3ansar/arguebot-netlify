@@ -67,13 +67,13 @@ function buildCardHTML(verdict: VerdictResult, argument: string): string {
       // ── Header ──
       '<div style="background:#E8251A;padding:22px 32px;display:flex;align-items:center;justify-content:space-between;">' +
         '<span style="font-weight:900;font-size:24px;letter-spacing:3px;color:white;text-transform:uppercase;font-family:' + FONT_BODY + ';">ARGUEBOSS</span>' +
-        '<div style="background:white;color:#E8251A;font-weight:900;font-size:34px;height:50px;padding:0 22px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-family:' + FONT_BODY + ';">' + verdict.score + '%</div>' +
+        '<div style="background:white;color:#E8251A;font-weight:900;font-size:34px;padding:8px 22px;border-radius:14px;text-align:center;line-height:1;font-family:' + FONT_BODY + ';">' + verdict.score + '%</div>' +
       '</div>' +
 
       // ── Ruling band ──
-      '<div style="background:' + rulingColor + ';padding:14px 32px;display:flex;align-items:center;gap:12px;">' +
-        '<span style="font-size:22px;">⚖️</span>' +
-        '<span style="font-weight:900;font-size:28px;letter-spacing:2px;color:white;text-transform:uppercase;font-family:' + FONT_BODY + ';">' + verdict.ruling + '</span>' +
+      '<div style="background:' + rulingColor + ';padding:14px 32px;">' +
+        '<span style="font-size:22px;vertical-align:middle;">⚖️</span>' +
+        '<span style="font-weight:900;font-size:28px;letter-spacing:2px;color:white;text-transform:uppercase;vertical-align:middle;font-family:' + FONT_BODY + ';"> ' + verdict.ruling + '</span>' +
       '</div>' +
 
       // ── Body ──
@@ -190,13 +190,13 @@ function buildDebateCardHTML(debate: DebateResult, argument: string): string {
           '<div style="font-weight:900;font-size:18px;letter-spacing:3px;color:white;text-transform:uppercase;font-family:' + FONT_BODY + ';">ARGUEBOSS</div>' +
           '<div style="font-size:10px;color:#555;letter-spacing:1px;text-transform:uppercase;font-family:' + FONT_BODY + ';">3-AI DEBATE · HEAVY MODE</div>' +
         '</div>' +
-        '<div style="background:#E8251A;color:white;font-weight:900;font-size:28px;height:40px;padding:0 18px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:' + FONT_BODY + ';">' + debate.score + '%</div>' +
+        '<div style="background:#E8251A;color:white;font-weight:900;font-size:28px;padding:6px 18px;border-radius:12px;text-align:center;line-height:1;font-family:' + FONT_BODY + ';">' + debate.score + '%</div>' +
       '</div>' +
 
       // Ruling band
-      '<div style="background:' + rulingColor + ';padding:12px 32px;display:flex;align-items:center;gap:12px;">' +
-        '<span style="font-size:22px;">\u2696\uFE0F</span>' +
-        '<span style="font-weight:900;font-size:24px;letter-spacing:2px;color:white;text-transform:uppercase;font-family:' + FONT_BODY + ';">' + debate.ruling + '</span>' +
+      '<div style="background:' + rulingColor + ';padding:12px 32px;">' +
+        '<span style="font-size:22px;vertical-align:middle;">\u2696\uFE0F</span>' +
+        '<span style="font-weight:900;font-size:24px;letter-spacing:2px;color:white;text-transform:uppercase;vertical-align:middle;font-family:' + FONT_BODY + ';"> ' + debate.ruling + '</span>' +
       '</div>' +
 
       '<div style="padding:24px 32px;">' +

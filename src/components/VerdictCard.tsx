@@ -152,6 +152,7 @@ export default function VerdictCard({ verdict, argument, mode }: Props) {
         )}
 
         {/* Research Papers */}
+        {mode === 'moderate' && (
         <div style={{ marginBottom: 16 }}>
           <div style={{
             fontSize: 11, fontWeight: 700,
@@ -243,6 +244,7 @@ export default function VerdictCard({ verdict, argument, mode }: Props) {
             )
           )}
         </div>
+        )}
 
         {/* Twist */}
         {verdict.twist && (

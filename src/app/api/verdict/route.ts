@@ -67,10 +67,19 @@ async function getPaperContext(argument: string): Promise<{ context: string; pap
         { role: 'user',   content: 'Argument: ' + argument },
       ],
     })
-    const q      = questionCompletion.choices[0]?.message?.content?.trim() ?? argument
+    let q = questionCompletion.choices[0]?.message?.content?.trim() ?? argument
     console.log('[OpenAlex] Question:', q)
-    const papers = await searchOpenAlex(q, 3)
+
+    let papers = await searchOpenAlex(q, 3)
     console.log('[OpenAlex] Papers:', papers.length)
+
+    // Fallback: if rewritten query returned nothing, try the original argument
+    if (papers.length === 0 && q !== argument) {
+      console.log('[OpenAlex] No results from query, trying original argument')
+      papers = await searchOpenAlex(argument, 3)
+      console.log('[OpenAlex] Fallback papers:', papers.length)
+    }
+
     return { context: formatPapersForPrompt(papers), papers }
   } catch (err) {
     console.error('[OpenAlex] Failed:', err)
