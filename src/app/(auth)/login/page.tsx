@@ -55,7 +55,7 @@ export default function LoginPage() {
               fontSize: 28, letterSpacing: 2, color: 'var(--white)',
               textDecoration: 'none',
             }}>
-              ARGUE<span style={{ color: 'var(--red)' }}>BOT</span>
+               ARGUE<span style={{ color: 'var(--red)' }}>BOSS</span>
             </Link>
             <h1 style={{
               fontFamily: "'Bebas Neue', sans-serif",

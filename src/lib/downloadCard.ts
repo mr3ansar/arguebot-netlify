@@ -12,6 +12,15 @@ const RULING_COLORS: Record<string, string> = {
 // Use only system fonts — no Google Fonts needed
 const FONT_BODY = '-apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif'
 
+function slugify(text: string, max = 60): string {
+  return text
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+    .slice(0, max)
+    .replace(/-+$/, '')
+}
+
 function buildCardHTML(verdict: VerdictResult, argument: string): string {
   const tone        = TONES.find(t => t.id === verdict.tone)
   const rulingColor = RULING_COLORS[verdict.ruling] ?? '#E8251A'
@@ -145,7 +154,7 @@ export async function downloadVerdictCard(verdict: VerdictResult, argument: stri
     })
 
     const link    = document.createElement('a')
-    link.download = 'argueboss-' + verdict.ruling.toLowerCase().replace(/\s/g, '-') + '.png'
+    link.download = 'argueboss-' + (argument ? slugify(argument) : verdict.ruling.toLowerCase().replace(/\s/g, '-')) + '.png'
     link.href     = canvas.toDataURL('image/png')
     link.click()
 
@@ -173,7 +182,7 @@ function buildDebateCardHTML(debate: DebateResult, argument: string): string {
   const toneLabel   = debate.tone.toUpperCase()
 
   return '<!DOCTYPE html><html><head><meta charset="utf-8">' +
-    '<style>* { box-sizing: border-box; margin: 0; padding: 0; } body { margin: 0; background: #1A1A1A; }</style>' +
+    '<style>* { box-sizing: border-box; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; } body { margin: 0; background: #1A1A1A; font-family: ' + FONT_BODY + '; } p, span, div { word-spacing: normal !important; letter-spacing: normal !important; }</style>' +
     '</head><body>' +
     '<div style="width:600px;background:#1A1A1A;overflow:hidden;font-family:' + FONT_BODY + ';">' +
 
@@ -282,7 +291,7 @@ export async function downloadDebateCard(debate: DebateResult, argument: string,
     })
 
     const link    = document.createElement('a')
-    link.download = 'argueboss-debate-' + debate.ruling.toLowerCase().replace(/\s/g, '-') + '.png'
+    link.download = 'argueboss-debate-' + (argument ? slugify(argument) : debate.ruling.toLowerCase().replace(/\s/g, '-')) + '.png'
     link.href     = canvas.toDataURL('image/png')
     link.click()
 

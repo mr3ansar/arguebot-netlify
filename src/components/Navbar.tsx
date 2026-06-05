@@ -101,7 +101,7 @@ export default function Navbar({ onOpenHistory, historyCount = 0 }: Props) {
             fontFamily: "'Bebas Neue', sans-serif",
             fontSize: 26, letterSpacing: 2, color: 'var(--white)',
           }}>
-            ARGUE<span style={{ color: 'var(--red)' }}>BOT</span>
+            ARGUE<span style={{ color: 'var(--red)' }}>BOSS</span>
           </span>
         </Link>
       </div>
