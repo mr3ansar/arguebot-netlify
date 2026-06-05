@@ -8,7 +8,7 @@ export const metadata = {
 
 export default function AboutPage() {
   return (
-    <div style={{ position: 'relative', minHeight: '100vh' }}>
+    <div style={{ position: 'relative', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
 
       {/* Background blobs */}
       <div style={{
@@ -24,11 +24,11 @@ export default function AboutPage() {
         pointerEvents: 'none', zIndex: 1,
       }} />
 
-      <div style={{ position: 'relative', zIndex: 5 }}>
+      <div style={{ position: 'relative', zIndex: 5, flex: 1 }}>
         <Navbar />
 
         <div className="about-content" style={{
-          maxWidth: 680, margin: '40px auto 80px',
+          maxWidth: 680, margin: '40px auto 40px',
           padding: '0 24px',
           animation: 'fadeInUp 0.6s ease both',
         }}>
@@ -43,7 +43,7 @@ export default function AboutPage() {
               fontSize: 12, fontWeight: 600,
               letterSpacing: '1.5px', textTransform: 'uppercase',
               padding: '6px 16px', borderRadius: 100, marginBottom: 20,
-            }}>⚖️ What is this</div>
+            }}>About ArgueBot</div>
 
             <h1 style={{
               fontFamily: "'Bebas Neue', sans-serif",
@@ -148,11 +148,11 @@ export default function AboutPage() {
             </div>
           </div>
 
-          {/* Tones */}
+          {/* The 5 judges */}
           <div className="about-card" style={{
             background: 'var(--charcoal-2)',
             border: '1px solid rgba(255,255,255,0.07)',
-            borderRadius: 32, padding: 32, marginBottom: 40,
+            borderRadius: 32, padding: 32, marginBottom: 24,
           }}>
             <div style={{
               fontSize: 11, fontWeight: 700,
@@ -187,8 +187,89 @@ export default function AboutPage() {
             </div>
           </div>
 
+          {/* What We Collect & Why — transparency section */}
+          <div className="about-card" style={{
+            background: 'var(--charcoal-2)',
+            border: '1px solid rgba(232,37,26,0.15)',
+            borderRadius: 32, padding: 32, marginBottom: 24,
+          }}>
+            <div style={{
+              display: 'flex', alignItems: 'center', gap: 8,
+              marginBottom: 20,
+            }}>
+              <div style={{
+                fontSize: 11, fontWeight: 700,
+                letterSpacing: '2px', textTransform: 'uppercase',
+                color: 'var(--red-light)',
+              }}>What We Collect & Why</div>
+            </div>
+
+            <p style={{ fontSize: 14, color: 'var(--muted)', lineHeight: 1.7, marginBottom: 20 }}>
+              We believe in being upfront about data. Here is exactly what ArgueBot collects and why.
+            </p>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+              {[
+                {
+                  title: 'Account Info',
+                  detail: 'Email and password (or Google profile if you use OAuth). Used only for authentication. Stored securely via Supabase.',
+                },
+                {
+                  title: 'Arguments & Verdicts',
+                  detail: 'The text you submit and the resulting verdict are saved so you can review your history. You can delete individual verdicts or wipe your entire history at any time.',
+                },
+                {
+                  title: 'IP Addresses',
+                  detail: 'Temporarily used for rate limiting to prevent abuse. Not stored permanently or logged.',
+                },
+                {
+                  title: 'Cookies',
+                  detail: 'Supabase auth session cookies only. No tracking, analytics, or advertising cookies — period.',
+                },
+                {
+                  title: 'Third-Party Processing',
+                  detail: 'Your argument text is sent to Groq (LLM), Tavily (web search), and OpenAlex (research papers) to generate your verdict. Each service operates under its own privacy policy.',
+                },
+              ].map((item, i) => (
+                <div key={i} style={{
+                  background: 'var(--charcoal-3)',
+                  borderRadius: 14, padding: '14px 18px',
+                }}>
+                  <div style={{
+                    fontSize: 13, fontWeight: 600,
+                    color: 'var(--white)', marginBottom: 4,
+                  }}>{item.title}</div>
+                  <p style={{
+                    fontSize: 13, color: 'var(--muted)',
+                    lineHeight: 1.5, margin: 0,
+                  }}>{item.detail}</p>
+                </div>
+              ))}
+            </div>
+
+            <div style={{
+              marginTop: 20,
+              padding: '14px 18px',
+              background: 'var(--red-dim)',
+              borderRadius: 14,
+              border: '1px solid rgba(232,37,26,0.15)',
+            }}>
+              <p style={{
+                fontSize: 13, color: 'var(--muted)', margin: 0, lineHeight: 1.6,
+              }}>
+                You have full control over your data. View your{' '}
+                <Link href="/delete-data" style={{ color: 'var(--red-light)' }}>data deletion page</Link>{' '}
+                to remove verdicts or delete your account at any time. See our{' '}
+                <Link href="/privacy" style={{ color: 'var(--red-light)' }}>Privacy Policy</Link>{' '}
+                and{' '}
+                <Link href="/terms" style={{ color: 'var(--red-light)' }}>Terms of Service</Link>{' '}
+                for full details.
+              </p>
+            </div>
+          </div>
+
           {/* CTA */}
-          <div style={{ textAlign: 'center' }}>
+          <div style={{ textAlign: 'center', marginTop: 32 }}>
             <Link href="/" style={{
               display: 'inline-flex', alignItems: 'center', gap: 10,
               background: 'var(--red)', color: 'white',
@@ -199,10 +280,9 @@ export default function AboutPage() {
               boxShadow: '0 6px 24px var(--red-glow)',
               transition: 'all 0.2s',
             }}>
-              🔍 START ARGUING
+              START ARGUING
             </Link>
           </div>
-
         </div>
       </div>
     </div>
