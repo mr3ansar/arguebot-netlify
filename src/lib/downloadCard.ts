@@ -46,6 +46,7 @@ function buildCardHTML(verdict: VerdictResult, argument: string): string {
   const paperRows = paperEvidence.slice(0, 1).map(p =>
     '<div style="background:rgba(232,37,26,0.1);border:1px solid rgba(232,37,26,0.25);border-radius:12px;padding:14px 16px;margin-bottom:14px;">' +
       '<div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#E8251A;margin-bottom:8px;font-family:' + FONT_BODY + ';">RESEARCH BACKED · OPENALEX</div>' +
+      (p.title ? '<div style="font-size:12px;font-weight:700;color:#eeeeee;margin-bottom:6px;font-family:' + FONT_BODY + ';">' + p.title + '</div>' : '') +
       '<p style="font-size:13px;color:#cccccc;line-height:1.6;margin:0 0 6px;font-family:' + FONT_BODY + ';word-spacing:normal;">' +
         (p.text.slice(0, 200) + (p.text.length > 200 ? '…' : '')) +
       '</p>' +

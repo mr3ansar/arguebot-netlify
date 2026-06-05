@@ -129,7 +129,7 @@ async function runModerate(argument: string, tone: Tone, useSearch: boolean) {
 
   const paperEvidence: EvidenceItem[] = papers.map(p => ({
     text:     p.abstract,
-    source:  'OpenAlex',
+    title:   p.title,
     type:    'paper' as const,
     url:     p.url,
     authors: p.authors.length > 0

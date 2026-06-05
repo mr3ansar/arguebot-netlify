@@ -10,10 +10,10 @@ export const metadata: Metadata = {
   keywords: ['fact checker', 'argument checker', 'ai debate', 'are you right', 'argueboss'],
   authors: [{ name: 'ArgueBoss' }],
   creator: 'ArgueBoss',
-  metadataBase: new URL('https://arguebot.vercel.app'),
+  metadataBase: new URL('https://argueboss.netlify.app'),
   openGraph: {
     type:        'website',
-    url:         'https://arguebot.vercel.app',
+    url:         'https://argueboss.netlify.app',
     title:       'ArgueBoss — Are You Actually Right?',
     description: 'Drop your argument. AI searches the web, weighs the facts, and delivers the verdict with zero mercy and maximum personality.',
     siteName:    'ArgueBoss',

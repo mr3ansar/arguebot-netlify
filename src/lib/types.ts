@@ -31,6 +31,7 @@ export interface EvidenceItem {
   url?: string          // link to paper or source
   authors?: string      // for papers: "Smith et al."
   year?: string         // for papers: "2023"
+  title?: string        // for papers: paper title
 }
 
 export interface VerdictResult {

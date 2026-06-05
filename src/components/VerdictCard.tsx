@@ -194,6 +194,13 @@ export default function VerdictCard({ verdict, argument }: Props) {
                     )}
                   </div>
 
+                  {item.title && (
+                    <div style={{
+                      fontSize: 13, fontWeight: 700, color: '#222',
+                      marginBottom: 6, lineHeight: 1.4,
+                    }}>{item.title}</div>
+                  )}
+
                   <p style={{
                     fontSize: 13, color: '#444',
                     lineHeight: 1.6, margin: '0 0 10px',

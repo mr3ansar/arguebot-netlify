@@ -101,7 +101,7 @@ export default function TermsPage() {
             </Section>
 
             <Section title="Contact">
-              <p>For questions about these terms, email <a href="mailto:legal@arguebot.app" style={{ color: 'var(--red-light)' }}>legal@arguebot.app</a>.</p>
+              <p>For questions about these terms, email <a href="mailto:legal@argueboss.netlify.app" style={{ color: 'var(--red-light)' }}>legal@argueboss.netlify.app</a>.</p>
             </Section>
           </div>
 

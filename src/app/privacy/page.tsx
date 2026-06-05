@@ -107,7 +107,7 @@ export default function PrivacyPage() {
             </Section>
 
             <Section title="Contact">
-              <p>For privacy questions or data requests, email <a href="mailto:privacy@arguebot.app" style={{ color: 'var(--red-light)' }}>privacy@arguebot.app</a>.</p>
+              <p>For privacy questions or data requests, email <a href="mailto:privacy@argueboss.netlify.app" style={{ color: 'var(--red-light)' }}>privacy@argueboss.netlify.app</a>.</p>
             </Section>
           </div>
 
