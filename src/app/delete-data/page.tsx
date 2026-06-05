@@ -230,12 +230,16 @@ export default function DeleteDataPage() {
               <div style={{
                 background: 'var(--charcoal-3)',
                 borderRadius: 16, padding: '16px 24px',
-                flex: 1, minWidth: 140,
+                flex: 1, minWidth: 0,
+                overflow: 'hidden',
               }}>
-                <div style={{ fontSize: 28, fontWeight: 700, color: 'var(--white)' }}>
+                <div style={{
+                  fontSize: 16, fontWeight: 600, color: 'var(--white)',
+                  overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
+                }}>
                   {user.email}
                 </div>
-                <div style={{ fontSize: 12, color: 'var(--muted)', marginTop: 4 }}>
+                <div style={{ fontSize: 12, color: 'var(--muted)', marginTop: 2 }}>
                   Account Email
                 </div>
               </div>

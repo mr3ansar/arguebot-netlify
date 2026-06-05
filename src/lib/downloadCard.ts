@@ -10,9 +10,7 @@ const RULING_COLORS: Record<string, string> = {
 }
 
 // Use only system fonts — no Google Fonts needed
-const FONT_DISPLAY  = 'Georgia, "Times New Roman", serif'
-const FONT_BODY     = '-apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif'
-const FONT_MONO     = '"Courier New", Courier, monospace'
+const FONT_BODY = '-apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif'
 
 function buildCardHTML(verdict: VerdictResult, argument: string): string {
   const tone        = TONES.find(t => t.id === verdict.tone)
@@ -30,7 +28,7 @@ function buildCardHTML(verdict: VerdictResult, argument: string): string {
           item.text +
         '</span>' +
         (item.source
-          ? '<span style="font-size:11px;color:#666666;font-family:' + FONT_MONO + ';margin-left:6px;">— ' + item.source + '</span>'
+          ? '<span style="font-size:11px;color:#666666;font-family:' + FONT_BODY + ';margin-left:6px;">— ' + item.source + '</span>'
           : '') +
       '</div>' +
     '</div>'
@@ -59,16 +57,16 @@ function buildCardHTML(verdict: VerdictResult, argument: string): string {
       // ── Header ──
       '<div style="background:#E8251A;padding:22px 32px;display:flex;align-items:center;justify-content:space-between;">' +
         '<div style="display:flex;align-items:center;gap:12px;">' +
-          '<div style="width:38px;height:38px;background:white;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:20px;color:#E8251A;font-family:' + FONT_DISPLAY + ';">A</div>' +
-          '<span style="font-weight:900;font-size:24px;letter-spacing:3px;color:white;text-transform:uppercase;font-family:' + FONT_DISPLAY + ';">ARGUEBOT</span>' +
+          '<div style="width:38px;height:38px;background:white;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:20px;color:#E8251A;font-family:' + FONT_BODY + ';">A</div>' +
+          '<span style="font-weight:900;font-size:24px;letter-spacing:3px;color:white;text-transform:uppercase;font-family:' + FONT_BODY + ';">ARGUEBOT</span>' +
         '</div>' +
-        '<div style="background:white;color:#E8251A;font-weight:900;font-size:34px;padding:8px 22px;border-radius:14px;font-family:' + FONT_DISPLAY + ';">' + verdict.score + '%</div>' +
+        '<div style="background:white;color:#E8251A;font-weight:900;font-size:34px;padding:8px 22px;border-radius:14px;font-family:' + FONT_BODY + ';">' + verdict.score + '%</div>' +
       '</div>' +
 
       // ── Ruling band ──
       '<div style="background:' + rulingColor + ';padding:14px 32px;display:flex;align-items:center;gap:12px;">' +
         '<span style="font-size:22px;">⚖️</span>' +
-        '<span style="font-weight:900;font-size:28px;letter-spacing:2px;color:white;text-transform:uppercase;font-family:' + FONT_DISPLAY + ';">' + verdict.ruling + '</span>' +
+        '<span style="font-weight:900;font-size:28px;letter-spacing:2px;color:white;text-transform:uppercase;font-family:' + FONT_BODY + ';">' + verdict.ruling + '</span>' +
       '</div>' +
 
       // ── Body ──
@@ -109,7 +107,7 @@ function buildCardHTML(verdict: VerdictResult, argument: string): string {
           '<div style="display:flex;align-items:center;gap:6px;background:#2E2E2E;color:#cccccc;font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;padding:7px 14px;border-radius:100px;font-family:' + FONT_BODY + ';">' +
             (tone?.emoji ?? '') + ' ' + (tone?.label ?? '') + ' MODE' +
           '</div>' +
-          '<div style="font-size:12px;color:#555555;font-family:' + FONT_MONO + ';">arguebot.app</div>' +
+          '<div style="font-size:12px;color:#555555;font-family:' + FONT_BODY + ';">arguebot.app</div>' +
         '</div>' +
 
       '</div>' +
@@ -143,16 +141,7 @@ export async function downloadVerdictCard(verdict: VerdictResult, argument: stri
       height:          cardEl.scrollHeight,
       windowWidth:     600,
       windowHeight:    cardEl.scrollHeight,
-      onclone: (clonedDoc: Document) => {
-        const allEls = clonedDoc.querySelectorAll('*')
-        allEls.forEach((el: any) => {
-          if (el.style) {
-            el.style.fontFamily = '-apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif'
-            el.style.wordSpacing = 'normal'
-            el.style.letterSpacing = 'normal'
-          }
-        })
-      },
+
     })
 
     const link    = document.createElement('a')
@@ -191,18 +180,18 @@ function buildDebateCardHTML(debate: DebateResult, argument: string): string {
       // Header
       '<div style="background:#1A1A1A;border-bottom:2px solid #333;padding:22px 32px;display:flex;align-items:center;justify-content:space-between;">' +
         '<div style="display:flex;align-items:center;gap:12px;">' +
-          '<div style="width:38px;height:38px;background:#E8251A;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:20px;color:white;font-family:' + FONT_DISPLAY + ';">A</div>' +
+          '<div style="width:38px;height:38px;background:#E8251A;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:20px;color:white;font-family:' + FONT_BODY + ';">A</div>' +
           '<div>' +
-            '<div style="font-weight:900;font-size:18px;letter-spacing:3px;color:white;text-transform:uppercase;font-family:' + FONT_DISPLAY + ';">ARGUEBOT</div>' +
+            '<div style="font-weight:900;font-size:18px;letter-spacing:3px;color:white;text-transform:uppercase;font-family:' + FONT_BODY + ';">ARGUEBOT</div>' +
             '<div style="font-size:10px;color:#555;letter-spacing:1px;text-transform:uppercase;font-family:' + FONT_BODY + ';">3-AI DEBATE · HEAVY MODE</div>' +
           '</div>' +
         '</div>' +
-        '<div style="background:#E8251A;color:white;font-weight:900;font-size:28px;padding:6px 18px;border-radius:12px;font-family:' + FONT_DISPLAY + ';">' + debate.score + '%</div>' +
+        '<div style="background:#E8251A;color:white;font-weight:900;font-size:28px;padding:6px 18px;border-radius:12px;font-family:' + FONT_BODY + ';">' + debate.score + '%</div>' +
       '</div>' +
 
       // Ruling band
       '<div style="background:' + rulingColor + ';padding:12px 32px;">' +
-        '<span style="font-weight:900;font-size:24px;letter-spacing:2px;color:white;text-transform:uppercase;font-family:' + FONT_DISPLAY + ';">\u2696\uFE0F ' + debate.ruling + '</span>' +
+        '<span style="font-weight:900;font-size:24px;letter-spacing:2px;color:white;text-transform:uppercase;font-family:' + FONT_BODY + ';">\u2696\uFE0F ' + debate.ruling + '</span>' +
       '</div>' +
 
       '<div style="padding:24px 32px;">' +
@@ -227,7 +216,7 @@ function buildDebateCardHTML(debate: DebateResult, argument: string): string {
         // VS
         '<div style="display:flex;align-items:center;gap:12px;margin:14px 0;">' +
           '<div style="flex:1;height:1px;background:rgba(255,255,255,0.08);"></div>' +
-          '<span style="font-weight:900;font-size:14px;letter-spacing:3px;color:#444;font-family:' + FONT_DISPLAY + ';">VS</span>' +
+          '<span style="font-weight:900;font-size:14px;letter-spacing:3px;color:#444;font-family:' + FONT_BODY + ';">VS</span>' +
           '<div style="flex:1;height:1px;background:rgba(255,255,255,0.08);"></div>' +
         '</div>' +
 
@@ -257,7 +246,7 @@ function buildDebateCardHTML(debate: DebateResult, argument: string): string {
         // Footer
         '<div style="display:flex;align-items:center;justify-content:space-between;padding-top:14px;border-top:1px solid rgba(255,255,255,0.08);">' +
           '<div style="background:#2E2E2E;color:#ccc;font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;padding:6px 12px;border-radius:100px;font-family:' + FONT_BODY + ';">\u2694\uFE0F ' + toneLabel + ' MODE</div>' +
-          '<div style="font-size:11px;color:#555;font-family:' + FONT_MONO + ';">arguebot.app</div>' +
+          '<div style="font-size:11px;color:#555;font-family:' + FONT_BODY + ';">arguebot.app</div>' +
         '</div>' +
 
       '</div>' +
@@ -290,16 +279,6 @@ export async function downloadDebateCard(debate: DebateResult, argument: string,
       height:          cardEl.scrollHeight,
       windowWidth:     600,
       windowHeight:    cardEl.scrollHeight,
-      onclone: (clonedDoc: Document) => {
-        const allEls = clonedDoc.querySelectorAll('*')
-        allEls.forEach((el: any) => {
-          if (el.style) {
-            el.style.fontFamily  = '-apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif'
-            el.style.wordSpacing = 'normal'
-            el.style.letterSpacing = 'normal'
-          }
-        })
-      },
     })
 
     const link    = document.createElement('a')
