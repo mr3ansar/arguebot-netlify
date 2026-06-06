@@ -26,15 +26,19 @@ export default function HistorySidebar({ open, onClose, items, loading, onSelect
   const [deletingId, setDeletingId]       = useState<string | null>(null)
   const [confirmId, setConfirmId]         = useState<string | null>(null)
 
-  // Close on outside click
+  // Close on outside click / touch
   useEffect(() => {
-    const handler = (e: MouseEvent) => {
+    const handler = (e: MouseEvent | TouchEvent) => {
       if (open && sidebarRef.current && !sidebarRef.current.contains(e.target as Node)) {
         onClose()
       }
     }
     document.addEventListener('mousedown', handler)
-    return () => document.removeEventListener('mousedown', handler)
+    document.addEventListener('touchstart', handler)
+    return () => {
+      document.removeEventListener('mousedown', handler)
+      document.removeEventListener('touchstart', handler)
+    }
   }, [open, onClose])
 
   // Close on Escape
@@ -49,10 +53,27 @@ export default function HistorySidebar({ open, onClose, items, loading, onSelect
     return () => document.removeEventListener('keydown', handler)
   }, [onClose, confirmId])
 
-  // Lock body scroll when open
+  // Lock body scroll when open (works on iOS too)
   useEffect(() => {
-    document.body.style.overflow = open ? 'hidden' : ''
-    return () => { document.body.style.overflow = '' }
+    if (open) {
+      document.body.style.overflow = 'hidden'
+      document.body.style.position = 'fixed'
+      document.body.style.width = '100%'
+      document.body.style.top = `-${window.scrollY}px`
+    } else {
+      const scrollY = document.body.style.top
+      document.body.style.overflow = ''
+      document.body.style.position = ''
+      document.body.style.width = ''
+      document.body.style.top = ''
+      if (scrollY) window.scrollTo(0, parseInt(scrollY || '0') * -1)
+    }
+    return () => {
+      document.body.style.overflow = ''
+      document.body.style.position = ''
+      document.body.style.width = ''
+      document.body.style.top = ''
+    }
   }, [open])
 
   const handleDelete = async (e: React.MouseEvent, id: string) => {

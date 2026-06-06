@@ -46,6 +46,8 @@ export async function fetchHistory(limit = 10, userId?: string): Promise<History
 
   if (userId) {
     query = query.eq('user_id', userId)
+  } else {
+    query = query.is('user_id', null)
   }
 
   const { data, error } = await query

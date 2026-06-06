@@ -33,7 +33,7 @@ export default function Navbar({ onOpenHistory, historyCount = 0 }: Props) {
       justifyContent: 'space-between',
       padding: '20px 40px',
       position: 'relative', zIndex: 10,
-    }}>
+    }} className="navbar">
       {/* Left — history icon + logo */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
 

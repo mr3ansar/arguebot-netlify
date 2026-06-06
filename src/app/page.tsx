@@ -33,7 +33,6 @@ export default function Home() {
   const [historyLoading, setHistoryLoading] = useState(true)
   const [sidebarOpen, setSidebarOpen]       = useState(false)
   const resultRef  = useRef<HTMLDivElement>(null)
-  const verdictRef = resultRef
 
   // Countdown timer for rate limit
   useEffect(() => {
