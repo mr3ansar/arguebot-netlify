@@ -99,11 +99,11 @@ export default function Navbar({ onOpenHistory, historyCount = 0 }: Props) {
       </div>
 
       {/* Right — nav links */}
-      <ul style={{ display: 'flex', alignItems: 'center', gap: 8, listStyle: 'none' }}>
+      <ul style={{ display: 'flex', alignItems: 'center', gap: 8, listStyle: 'none' }} className="navbar-links">
         {[
           { label: 'About', href: '/about' },
         ].map(link => (
-          <li key={link.label}>
+          <li key={link.label} className="nav-about">
             <Link
               href={link.href}
               style={{
@@ -227,7 +227,7 @@ export default function Navbar({ onOpenHistory, historyCount = 0 }: Props) {
           </li>
         ) : (
           <>
-            <li>
+            <li className="nav-login">
               <Link
                 href="/login"
                 style={{
@@ -248,7 +248,7 @@ export default function Navbar({ onOpenHistory, historyCount = 0 }: Props) {
                 }}
               >Log In</Link>
             </li>
-            <li>
+            <li className="nav-signup">
               <Link
                 href="/signup"
                 style={{
@@ -275,5 +275,17 @@ export default function Navbar({ onOpenHistory, historyCount = 0 }: Props) {
         )}
       </ul>
     </nav>
+
+    <style>{`
+      @media (max-width: 767px) {
+        .navbar-links { gap: 4px !important; }
+        .nav-login a, .nav-signup a { padding: 6px 10px !important; }
+      }
+      @media (max-width: 400px) {
+        .nav-about { display: none !important; }
+        .nav-login a { padding: 6px 8px !important; font-size: 13px !important; }
+        .nav-signup a { padding: 6px 10px !important; font-size: 13px !important; }
+      }
+    `}</style>
   )
 }
