@@ -63,6 +63,8 @@ body {
   .navbar {
     padding: 14px 16px !important;
   }
+  .navbar-links { gap: 4px !important; }
+  .nav-login a, .nav-signup a { padding: 6px 10px !important; }
 
   /* Hero */
   .hero-section {
@@ -214,4 +216,10 @@ body {
   .hero-heading {
     font-size: clamp(40px, 14vw, 52px) !important;
   }
+}
+
+@media (max-width: 400px) {
+  .nav-about { display: none !important; }
+  .nav-login a { padding: 6px 8px !important; font-size: 13px !important; }
+  .nav-signup a { padding: 6px 10px !important; font-size: 13px !important; }
 }

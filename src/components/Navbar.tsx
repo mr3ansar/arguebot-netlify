@@ -276,16 +276,5 @@ export default function Navbar({ onOpenHistory, historyCount = 0 }: Props) {
       </ul>
     </nav>
 
-    <style>{`
-      @media (max-width: 767px) {
-        .navbar-links { gap: 4px !important; }
-        .nav-login a, .nav-signup a { padding: 6px 10px !important; }
-      }
-      @media (max-width: 400px) {
-        .nav-about { display: none !important; }
-        .nav-login a { padding: 6px 8px !important; font-size: 13px !important; }
-        .nav-signup a { padding: 6px 10px !important; font-size: 13px !important; }
-      }
-    `}</style>
   )
 }
